@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <title>プライバシーポリシー — Sumi Notes</title>
+    <meta
+      name="description"
+      content="Windows のノートアプリ「Sumi Notes」のプライバシーポリシーです。"
+    />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/site.css" />
+  </head>
+  <body>
+    <header class="site-header" data-testid="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html" data-testid="brand-link">
+          <svg class="brand__mark" viewBox="107 47 810 930" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient
+                id="brand-ink"
+                gradientUnits="userSpaceOnUse"
+                cx="422"
+                cy="526"
+                r="468"
+              >
+                <stop offset="0" class="brand__stop-ink-soft" />
+                <stop offset="0.6" class="brand__stop-ink" />
+              </radialGradient>
+            </defs>
+            <path
+              class="brand__rim"
+              d="M 512.0 76.9 L 766.6 331.4 A 360 360 0 1 1 257.4 331.4 Z"
+              fill="url(#brand-ink)"
+              stroke-width="60"
+              stroke-linejoin="round"
+            />
+            <ellipse
+              class="brand__light"
+              cx="362"
+              cy="556"
+              rx="48"
+              ry="104"
+              transform="rotate(-28 362 556)"
+              opacity="0.9"
+            />
+          </svg>
+          <span class="brand__name">Sumi Notes</span>
+        </a>
+        <nav class="site-nav" aria-label="サイトの案内">
+          <ul class="site-nav__list">
+            <li>
+              <a class="site-nav__link" href="index.html#features" data-testid="nav-features"
+                >特徴</a
+              >
+            </li>
+            <li>
+              <a class="site-nav__link" href="index.html#download" data-testid="nav-download"
+                >入手の方法</a
+              >
+            </li>
+            <li>
+              <a
+                class="site-nav__link"
+                href="privacy.html"
+                aria-current="page"
+                data-testid="nav-privacy"
+                >プライバシーポリシー</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="prose-page">
+      <article class="prose" data-testid="privacy-policy">
+        <h1 class="prose__title">Sumi Notes のプライバシーポリシー</h1>
+
+        <p class="prose__updated" data-testid="privacy-updated">
+          最終の更新日: <time datetime="2026-10-29">2026年10月29日</time>
+        </p>
+
+        <h2>1. はじめに</h2>
+        <p>Sumi Notes（以下「本アプリ」）は、Windows で動作するノートアプリです。</p>
+        <p>
+          本プライバシーポリシー（以下「本ポリシー」）は、本アプリにおける利用者の情報の取り扱いについて定めるものです。本ポリシーは、本アプリの公式サイト（以下「本サイト」）に掲載しています。
+        </p>
+
+        <h2>2. 取得する情報</h2>
+        <p>
+          本アプリは、利用者の情報を収集しません。また、利用者の情報をどこにも送信しません。具体的には、次のことを行いません。
+        </p>
+        <ul>
+          <li>利用状況や操作の記録（アクセス解析・統計）の取得</li>
+          <li>エラーの情報を開発者に送信する仕組み（クラッシュレポート）の利用</li>
+          <li>広告の表示</li>
+        </ul>
+        <p>本アプリには、アカウントの登録やサインインの機能はありません。</p>
+
+        <h2>3. 情報の利用目的</h2>
+        <p>
+          本アプリは利用者の情報を取得しないため、利用者の情報を何らかの目的に利用することはありません。
+        </p>
+        <p>
+          利用者の PC の中に保存するデータ（7.
+          を参照）は、ノートの表示・検索・改訂履歴などの本アプリの機能を提供するためだけに、その PC
+          の中で使用します。
+        </p>
+
+        <h2>4. 第三者への提供</h2>
+        <p>本アプリは利用者の情報を取得しないため、第三者に提供することもありません。</p>
+        <p>
+          ただし、5.
+          に記載する外部の画像を取得する際には、画像を配信するサーバーに接続の情報が伝わります。
+        </p>
+
+        <h2>5. 外部との通信</h2>
+        <p>本アプリがインターネットに接続するのは、次の2つの場合に限ります。</p>
+        <ol>
+          <li>
+            <strong>ノートに記載された外部の画像を表示するとき</strong>
+            <ul>
+              <li>
+                ノートの本文にインターネット上の画像の URL（<code>https:</code>
+                で始まるもの）が記載されている場合、プレビューの表示・PDF
+                の書き出し・印刷の際に、その画像を取得します
+              </li>
+              <li>
+                取得の対象は、<code>https:</code> で始まる URL
+                に限ります。家庭や社内のネットワークのアドレス（<code>localhost</code>
+                やプライベート IP アドレスなど）からは取得しません
+              </li>
+              <li>
+                画像を配信するサーバーには、一般的な Web の閲覧と同様に、利用者の IP
+                アドレスなどの接続の情報が伝わります。本アプリが、Cookie
+                やノートの内容を送信することはありません
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>利用者がノートの中のリンクを押したとき</strong>
+            <ul>
+              <li>
+                リンク先を、PC
+                の既定のブラウザで開きます。開いた後の情報の取り扱いは、そのブラウザとリンク先のサイトの定めに従います
+              </li>
+            </ul>
+          </li>
+        </ol>
+        <p>
+          これらのほかに、本アプリが自ら外部と通信することはありません。フォントなどの構成要素は本アプリに含まれており、インターネットから読み込みません。
+        </p>
+
+        <h2>6. クリップボードの利用</h2>
+        <p>
+          本アプリは、「HTML
+          としてコピー」などの操作が行われたときに限り、クリップボードに書き込みます。また、画像の貼り付けなど、利用者が貼り付けの操作を行ったときに限り、クリップボードを読み取ります。
+        </p>
+
+        <h2>7. 情報の保存場所</h2>
+        <p>本アプリが作成するデータは、すべて利用者の PC の中に保存します。</p>
+        <ul>
+          <li>
+            <strong>ノート</strong>: 利用者が選んだ「ノートのフォルダ」に、Markdown
+            形式のファイル（<code>.md</code>）として保存します。貼り付けた画像、テンプレート、ゴミ箱、タグの色などのフォルダ全体の設定も、このフォルダの中に保存します
+          </li>
+          <li>
+            <strong>アプリの設定など</strong>:
+            配色や文字の大きさなどの設定、全文検索の索引、ノートの改訂履歴、ウィンドウの大きさと前回の画面の状態は、その
+            PC の中のアプリ用の領域に保存します
+          </li>
+        </ul>
+        <p>
+          本アプリが、これらのデータを外部へ送信することはありません。ノートのフォルダを OneDrive
+          などの同期サービスのフォルダの中に置いた場合、そのファイルの取り扱いは、その同期サービスの定めに従います。
+        </p>
+        <p>本アプリをアンインストールしても、ノートのフォルダとその中のノートは削除されません。</p>
+
+        <h2>8. Microsoft Store を通じた入手と更新</h2>
+        <p>
+          本アプリの入手・更新・アンインストールは、Microsoft Store と Windows
+          が行います。その際の情報の取り扱いは、Microsoft のプライバシーに関する声明に従います。
+        </p>
+
+        <h2>9. 本ポリシーの改定</h2>
+        <p>本ポリシーを改定する場合は、本ページを更新し、更新日を記載します。</p>
+
+        <h2>10. お問い合わせ</h2>
+        <p>本ポリシーに関するお問い合わせは、次のメールアドレスで受け付けます。</p>
+        <p>
+          <a href="mailto:sumi.notes.support@gmail.com" data-testid="privacy-contact"
+            >sumi.notes.support@gmail.com</a
+          >
+        </p>
+        <p>発行元: Sumi Notes</p>
+      </article>
+    </main>
+
+    <footer class="site-footer" data-testid="site-footer">
+      <div class="site-footer__inner">
+        <a class="brand brand--footer" href="index.html">
+          <svg class="brand__mark" viewBox="107 47 810 930" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient
+                id="brand-ink-footer"
+                gradientUnits="userSpaceOnUse"
+                cx="422"
+                cy="526"
+                r="468"
+              >
+                <stop offset="0" class="brand__stop-ink-soft" />
+                <stop offset="0.6" class="brand__stop-ink" />
+              </radialGradient>
+            </defs>
+            <path
+              class="brand__rim"
+              d="M 512.0 76.9 L 766.6 331.4 A 360 360 0 1 1 257.4 331.4 Z"
+              fill="url(#brand-ink-footer)"
+              stroke-width="60"
+              stroke-linejoin="round"
+            />
+            <ellipse
+              class="brand__light"
+              cx="362"
+              cy="556"
+              rx="48"
+              ry="104"
+              transform="rotate(-28 362 556)"
+              opacity="0.9"
+            />
+          </svg>
+          <span class="brand__name">Sumi Notes</span>
+        </a>
+        <ul class="site-footer__links">
+          <li>
+            <a class="site-footer__link" href="privacy.html" data-testid="footer-privacy"
+              >プライバシーポリシー</a
+            >
+          </li>
+          <li>
+            お問い合わせ:
+            <a
+              class="site-footer__link"
+              href="mailto:sumi.notes.support@gmail.com"
+              data-testid="footer-contact"
+              >sumi.notes.support@gmail.com</a
+            >
+          </li>
+        </ul>
+        <p class="site-footer__copyright" data-testid="footer-copyright">© 2026 Sumi Notes</p>
+      </div>
+    </footer>
+  </body>
+</html>

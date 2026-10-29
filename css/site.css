@@ -1,0 +1,964 @@
+/*
+ * Sumi Notes の公式サイトのレイアウトと部品。
+ * 値はすべて tokens.css の変数を使う（1px の罫線など構造上の値を除く）。
+ * ホバーで動くのはメインの画像（.hero-shot）だけ。ボタン・カード・ほかの画像は、ホバーで色や下線が変わるだけ。
+ * トップのページの data-reveal の要素は、表示のときに下から少し上がりながら現れる（Sprint 41。
+ * js/main.js（読み込まれてすぐの準備）が <html> に .reveal-ready を付けたときだけ。下の「表示のときのフェードイン」）。
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--color-bg-page);
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg-page);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body-md);
+  overflow-wrap: anywhere;
+  font-variant-numeric: lining-nums;
+}
+
+/* 日本語の見出しと短い説明は、文節で折り返し、行の長さをそろえる */
+h1,
+h2,
+h3,
+.hero__lead,
+.closing__text {
+  overflow-wrap: normal;
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+code,
+kbd {
+  font-family: var(--font-mono);
+}
+
+/* --- ヘッダー（nav-bar: canvas の地、body-sm の文字） -------------------------------------- */
+
+.site-header {
+  background: var(--color-bg-header);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 var(--space-lg);
+  max-width: var(--layout-max-width);
+  min-height: var(--layout-header-height);
+  margin: 0 auto;
+  padding: var(--space-xs) var(--layout-gutter);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: var(--touch-target-min);
+  color: var(--color-text);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-title);
+  letter-spacing: var(--letter-spacing-title);
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+.brand__mark {
+  width: var(--brand-mark-size);
+  height: var(--brand-mark-size);
+  flex: none;
+  overflow: visible;
+}
+
+.brand__stop-ink {
+  stop-color: var(--color-brand-drop-ink);
+}
+
+.brand__stop-ink-soft {
+  stop-color: var(--color-brand-drop-ink-soft);
+}
+
+.brand__rim {
+  stroke: var(--color-brand-drop-light);
+}
+
+.brand__light {
+  fill: var(--color-brand-drop-light);
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target-min);
+  color: var(--color-text);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+}
+
+.site-nav__link[aria-current='page'] {
+  color: var(--color-link);
+}
+
+/* --- ボタン（マーケティングの CTA は pill） --------------------------------------------- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch-target-min);
+  padding: var(--space-xs) var(--space-lg);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body-md);
+  text-align: center;
+}
+
+.button:hover {
+  text-decoration: none;
+}
+
+.button--primary {
+  background: var(--color-button-primary-bg);
+  color: var(--color-button-primary-text);
+}
+
+.button--primary:hover,
+.button--primary:active {
+  background: var(--color-button-primary-bg-active);
+}
+
+.button--secondary {
+  background: var(--color-button-secondary-bg);
+  color: var(--color-button-secondary-text);
+  border-color: var(--color-button-secondary-border);
+}
+
+.button--secondary:hover,
+.button--secondary:active {
+  background: var(--color-button-secondary-bg-hover);
+}
+
+/* --- ヒーロー（ページで1か所だけの藍の帯。画像の上半分までを帯に載せる） ------------------- */
+
+.hero {
+  padding: var(--space-section-narrow) 0;
+  /* 2色の境目だけの塗り分け（ぼかしの無い色の切り替え）。帯は画像の途中で終わる */
+  background: linear-gradient(
+    to bottom,
+    var(--color-hero-band) calc(100% - var(--hero-band-tail)),
+    var(--color-bg-page) 0
+  );
+}
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xxl);
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: 0 var(--layout-gutter);
+}
+
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  max-width: var(--layout-prose-width);
+  color: var(--color-hero-band-text);
+  text-align: center;
+}
+
+.hero__text :focus-visible {
+  outline-color: var(--color-hero-focus-ring);
+}
+
+.hero__title {
+  margin: 0;
+  font-size: var(--font-size-display-1);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading-1);
+  letter-spacing: var(--letter-spacing-display-1);
+}
+
+.hero__lead {
+  margin: 0;
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-prose);
+}
+
+/* 説明の書き出しの1文（キャッチコピーの続き）は1行に立て、続きの説明と分ける */
+.hero__hook {
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+/* 製品名は途中で改行しない */
+.hero__name {
+  white-space: nowrap;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+
+.hero__actions .button--secondary {
+  background: var(--color-hero-button-secondary-bg);
+  color: var(--color-hero-button-secondary-text);
+  border-color: var(--color-hero-button-secondary-border);
+  box-shadow: var(--shadow-level-1);
+}
+
+.hero__actions .button--secondary:hover,
+.hero__actions .button--secondary:active {
+  background: var(--color-hero-button-secondary-bg-hover);
+}
+
+.hero__figure {
+  width: 100%;
+  margin-top: var(--space-md);
+}
+
+/* メインの画像（動くのはここだけ。main.js が --tilt-x / --tilt-y / --glare-* を入れる） */
+.hero-shot {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-card);
+  box-shadow: var(--shadow-level-2);
+  transform: none;
+}
+
+.hero-shot.is-tilting {
+  transform: perspective(var(--hero-perspective)) rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg));
+  will-change: transform;
+}
+
+/* ホバー中は影を一段深く（同じ Level 2 の最後の段を強める） */
+.hero-shot.is-hovered {
+  box-shadow: var(--shadow-level-2), var(--shadow-hero-hover);
+}
+
+/* 斜めの光の帯（傾きに合わせて位置と濃さが変わる） */
+.hero-shot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image: linear-gradient(
+    115deg,
+    transparent 41%,
+    var(--color-hero-glare-tint) 47%,
+    var(--color-hero-glare) 50%,
+    var(--color-hero-glare-tint) 53%,
+    transparent 59%
+  );
+  background-size: 200% 200%;
+  background-position: var(--glare-x, 50%) var(--glare-y, 50%);
+  opacity: var(--glare-opacity, 0);
+  pointer-events: none;
+}
+
+.hero-shot__image {
+  width: 100%;
+}
+
+/* 動きを減らす設定とタッチの画面では、念のため CSS でも傾けない */
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .hero-shot.is-tilting {
+    transform: none;
+  }
+
+  .hero-shot::after {
+    opacity: 0;
+  }
+}
+
+/* 事実の帯: 札にせず、細い罫で区切った1行 */
+.hero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-xs) 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  padding: 0 var(--space-md);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+  /* 狭い幅で2行になるときも、語の途中（「ファ|イル」など）では折り返さない */
+  overflow-wrap: normal;
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+
+.chip + .chip {
+  border-left: 1px solid var(--color-border);
+}
+
+/* --- 節 ------------------------------------------------------------------------- */
+
+.section {
+  padding: var(--space-section) 0;
+}
+
+.section__inner {
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: 0 var(--layout-gutter);
+}
+
+.section__title {
+  margin: 0 0 var(--space-xxl);
+  font-size: var(--font-size-heading-1);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading-1);
+  letter-spacing: var(--letter-spacing-heading-1);
+}
+
+/* --- 特徴 ------------------------------------------------------------------------ */
+/*
+ * 並び: 文字だけの2枚（ショートカットを大きく見せる白いカード）を横に並べ、
+ * そのあと画面の写真の4つを、文字と写真を左右に分けた行にして、左右を交互にする。
+ * 写真の行はカードの枠を付けず、地の上に直接置く。
+ */
+
+.features {
+  padding-top: var(--space-section-narrow);
+}
+
+.features__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+.feature-card__title {
+  margin: 0;
+  font-size: var(--font-size-heading-3);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading-3);
+  letter-spacing: var(--letter-spacing-heading-3);
+}
+
+.feature-card__text {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-prose);
+}
+
+.feature-card__keys {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xxs);
+  margin: 0;
+}
+
+.feature-card__key-label {
+  margin-left: var(--space-xs);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+.kbd {
+  display: inline-block;
+  min-width: var(--space-lg);
+  padding: 0 var(--space-xs);
+  border: 1px solid var(--color-border);
+  border-bottom-width: 2px;
+  border-radius: var(--radius-xs);
+  background: var(--color-bg-kbd);
+  color: var(--color-text);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-body-md);
+  text-align: center;
+}
+
+.kbd-plus {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+}
+
+.feature-card__image {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-level-1);
+}
+
+/* 文字だけのカード（feature-card: surface・rounded.lg・padding 24px・罫線） */
+.feature-card--keys {
+  order: 1;
+  /* 説明の行が余りの高さを受け持ち、キーのくぼみを下端にそろえる（margin: auto を使わない） */
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: var(--space-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+}
+
+.feature-card--keys .feature-card__keys {
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-lg) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-well);
+}
+
+.feature-card--keys .kbd {
+  min-width: var(--space-xxl);
+  padding: var(--space-xxs) var(--space-sm);
+  background: var(--color-bg-card);
+  font-size: var(--kbd-size-large);
+  line-height: var(--line-height-title);
+}
+
+.feature-card--keys .feature-card__key-label {
+  flex-basis: 100%;
+  margin: var(--space-xxs) 0 0;
+  text-align: center;
+}
+
+/* 写真の行: 文字（1）と写真（2）。文字は縦の中央に寄せる */
+.feature-card--wide {
+  order: 2;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  grid-template-rows: 1fr auto auto auto 1fr;
+  column-gap: var(--space-split);
+  row-gap: var(--space-sm);
+  margin-top: var(--space-section-narrow);
+}
+
+.feature-card--wide > :not(img) {
+  grid-column: 1;
+}
+
+.feature-card--wide .feature-card__title {
+  grid-row: 2;
+}
+
+.feature-card--wide .feature-card__text {
+  grid-row: 3;
+}
+
+.feature-card--wide .feature-card__keys {
+  grid-row: 4;
+  margin-top: var(--space-xs);
+}
+
+.feature-card--wide .feature-card__image {
+  grid-column: 2;
+  grid-row: 1 / -1;
+}
+
+/* 左右を入れ替えた行 */
+.feature-card--flip {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+}
+
+.feature-card--flip > :not(img) {
+  grid-column: 2;
+}
+
+.feature-card--flip .feature-card__image {
+  grid-column: 1;
+}
+
+/* --- 入手の方法 ---------------------------------------------------------------------- */
+
+.download .section__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  grid-template-rows: auto 1fr;
+  gap: 0 var(--space-split);
+  align-items: start;
+}
+
+.download .section__title {
+  grid-column: 1;
+}
+
+.download__notice {
+  grid-column: 1;
+  margin: 0;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-notice);
+  color: var(--color-text);
+  line-height: var(--line-height-prose);
+}
+
+.download__list {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  margin: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+}
+
+.download__row {
+  display: grid;
+  grid-template-columns: minmax(0, 10em) minmax(0, 1fr);
+  align-items: baseline; /* the term (body-sm) and the value (body-md) share their first baseline */
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+}
+
+.download__row + .download__row {
+  border-top: 1px solid var(--color-border);
+}
+
+.download__term {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-md);
+  white-space: nowrap;
+}
+
+.download__desc {
+  margin: 0;
+}
+
+/* 「対応 OS」の説明: まとまり（.download__phrase）の途中では改行せず、まとまりの間でだけ折り返す */
+.download__line {
+  display: block;
+}
+
+.download__phrase {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* ページの中のリンクで移った先の見出し（main.js がフォーカスを移す。tabindex="-1"） */
+#features-title,
+#download-title {
+  /* キーボードで移ったときの枠を、行の幅いっぱいではなく見出しの文字に沿わせる */
+  width: fit-content;
+  border-radius: var(--radius-xs);
+}
+
+#features-title:focus,
+#download-title:focus {
+  outline: none;
+}
+
+#features-title:focus-visible,
+#download-title:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+}
+
+/* --- 締め（Level 1 の影の浮いた面: feature-card-elevated・rounded.xl） ------------------- */
+
+.closing {
+  padding: 0 var(--layout-gutter) var(--space-section);
+}
+
+.closing__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.closing .section__inner {
+  max-width: calc(var(--layout-max-width) - 2 * var(--layout-gutter));
+  padding: var(--space-section-narrow) var(--space-xxl);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-card);
+  box-shadow: var(--shadow-level-1);
+}
+
+.closing__inner .section__title {
+  margin: 0;
+}
+
+.closing__text {
+  margin: 0;
+  max-width: var(--layout-prose-width);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-prose);
+}
+
+/* --- フッター（footer: canvas-soft・ink-secondary・caption・padding 32px） ---------------- */
+
+.site-footer {
+  background: var(--color-bg-footer);
+  border-top: 1px solid var(--color-border);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md) var(--space-lg);
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: var(--space-xxl) var(--layout-gutter);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+.brand--footer {
+  font-size: var(--font-size-body-md);
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target-min);
+  color: var(--color-footer-link);
+  text-decoration: underline;
+}
+
+.site-footer__copyright {
+  margin: 0;
+}
+
+/* --- プライバシーポリシー ---------------------------------------------------------------- */
+
+.prose-page {
+  padding: var(--space-section-narrow) var(--layout-gutter) var(--space-section);
+}
+
+.prose {
+  max-width: var(--layout-prose-width);
+  margin: 0 auto;
+  line-height: var(--line-height-prose);
+}
+
+.prose__title {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--font-size-heading-1);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading-1);
+  letter-spacing: var(--letter-spacing-heading-1);
+}
+
+.prose__updated {
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+}
+
+.prose__pending {
+  font-weight: var(--font-weight-semibold);
+}
+
+.prose h2 {
+  margin: var(--space-split) 0 var(--space-sm);
+  font-size: var(--font-size-heading-2);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading-2);
+  letter-spacing: var(--letter-spacing-heading-2);
+}
+
+.prose p,
+.prose ul,
+.prose ol {
+  margin: 0 0 var(--space-md);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: var(--space-lg);
+}
+
+.prose li + li {
+  margin-top: var(--space-xxs);
+}
+
+.prose li ul {
+  margin: var(--space-xxs) 0 var(--space-xs);
+}
+
+.prose a {
+  text-decoration: underline;
+}
+
+.prose code {
+  padding: 0 var(--space-xxs);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg-card);
+  font-size: var(--font-size-caption);
+}
+
+/* --- 幅ごとの並び（design-tokens の Desktop / Tablet / Mobile） ------------------------------ */
+
+@media (max-width: 1079px) {
+  .hero__title {
+    font-size: var(--font-size-display-2);
+    letter-spacing: var(--letter-spacing-display-2);
+  }
+}
+
+/* Tablet 以下: 写真の行は、文字の下に写真を置く（写真を幅いっぱいにして読みやすく） */
+@media (max-width: 840px) {
+  .feature-card--wide,
+  .feature-card--flip {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    margin-top: var(--space-xxl);
+  }
+
+  .feature-card--wide .feature-card__title,
+  .feature-card--wide .feature-card__text,
+  .feature-card--wide .feature-card__keys,
+  .feature-card--wide .feature-card__image,
+  .feature-card--flip .feature-card__title,
+  .feature-card--flip .feature-card__text,
+  .feature-card--flip .feature-card__keys,
+  .feature-card--flip .feature-card__image {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .feature-card--wide .feature-card__image {
+    margin-top: var(--space-xs);
+  }
+
+  .download .section__inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+  }
+
+  .download__notice {
+    margin-bottom: var(--space-lg);
+  }
+
+  .download__list {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-nav__list {
+    gap: 0 var(--space-md);
+  }
+
+  .hero {
+    padding-top: var(--space-xxl);
+  }
+
+  .hero__title {
+    font-size: var(--font-size-heading-1);
+    line-height: var(--line-height-heading-1);
+    letter-spacing: var(--letter-spacing-heading-1);
+  }
+
+  .hero__lead {
+    font-size: var(--font-size-body-md);
+  }
+
+  .hero__actions,
+  .hero__actions .button,
+  .closing__inner .button {
+    width: 100%;
+  }
+
+  .hero-shot {
+    border-radius: var(--radius-lg);
+  }
+
+  .chip {
+    padding: 0 var(--space-sm);
+  }
+
+  .section {
+    padding: var(--space-section-narrow) 0;
+  }
+
+  .section__title,
+  .prose__title {
+    font-size: var(--font-size-heading-2);
+    line-height: var(--line-height-heading-2);
+    letter-spacing: var(--letter-spacing-heading-2);
+  }
+
+  .features__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .feature-card__title {
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-title);
+    letter-spacing: var(--letter-spacing-title);
+  }
+
+  .download__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xxs);
+    /* 16px（24px から）: 375px で dd が 293px になり、最も長いまとまり（約 283px）が収まる */
+    padding: var(--space-md);
+  }
+
+  .closing {
+    padding-bottom: var(--space-section-narrow);
+  }
+
+  .closing .section__inner {
+    padding: var(--space-xxl) var(--space-lg);
+  }
+
+  .prose h2 {
+    margin-top: var(--space-xxl);
+  }
+}
+
+/*
+ * Narrower than the contract's 375px (360px phones, 320px = 1280px at 400% zoom): the longest
+ * phrase of the 対応 OS row (about 283px) no longer fits the dd, so the phrases wrap again,
+ * at phrase boundaries only (never inside a word), instead of running out of the card.
+ */
+@media (max-width: 374px) {
+  .download__phrase {
+    white-space: normal;
+    word-break: auto-phrase;
+  }
+}
+
+/*
+ * Phones: the facts in two centred lines. The three short ones stay on the first line with
+ * their rules; the long one (.chip--wide) takes the second line by itself, without a rule
+ * (a rule at a line's start looks stray). Only the visual order changes; nothing in it is focusable.
+ */
+@media (max-width: 600px) {
+  .hero__facts {
+    width: 100%;
+    text-align: center;
+  }
+
+  .chip--wide {
+    order: 1;
+    flex-basis: 100%;
+  }
+
+  .chip + .chip.chip--wide {
+    border-left: 0;
+  }
+}
+
+/* --- 表示のときのフェードイン（トップのページだけ） ----------------------------------------- */
+
+/*
+ * 隠すのは、画面の表示で、動きを減らす設定が無く、js/main.js の準備が .reveal-ready を付けたときだけ。
+ * 印刷・JavaScript なし・IntersectionObserver なし・reduced-motion では、最初からすべて見えている。
+ * 変えるのは opacity と transform（縦の移動）だけ（レイアウトはずれない）。
+ * メインの画像は、傾く .hero-shot ではなく、包む .hero__figure を動かす（傾きの transform とぶつけない）。
+ */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .reveal-ready [data-reveal] {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance));
+    transition:
+      opacity var(--reveal-duration) var(--reveal-easing) var(--reveal-delay, 0ms),
+      transform var(--reveal-duration) var(--reveal-easing) var(--reveal-delay, 0ms);
+  }
+
+  .reveal-ready [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ページの中のリンク・# 付きのアドレスで移った先と、それより上: 動かさずにすぐ見せる */
+  .reveal-ready [data-reveal].is-revealed-instant {
+    transition: none;
+  }
+}

@@ -1,0 +1,240 @@
+/*
+ * Sumi Notes の公式サイトのデザイントークン。
+ * 色・文字の大きさ・角丸・余白・影・動きの値は、すべてこのファイルにまとめる。
+ * site.css はここの変数だけを参照し、値を直接書かない（1px の罫線など構造上の値を除く）。
+ *
+ * - ライト: docs/design-tokens.md の値
+ * - ダーク: docs/design-references/dark-palette.md の「ライトとダークの対応」
+ *   OS の配色（prefers-color-scheme）で切り替える。
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Palette (docs/design-tokens.md "colors") */
+  --color-primary: #0075de;
+  --color-primary-active: #005bab;
+  --color-secondary: #213183;
+  --color-on-primary: #ffffff;
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #f6f5f4;
+  --color-surface: #ffffff;
+  --color-ink: #000000;
+  --color-ink-secondary: #31302e;
+  --color-ink-muted: #615d59;
+  --color-ink-faint: #a39e98;
+  --color-hairline: #e6e6e6;
+  --color-accent-sky: #62aef0;
+
+  /* Roles (site.css uses these) */
+  /*
+   * The page sits on the warm canvas-soft (design-tokens Do / Don't). primary (#0075de)
+   * is 4.19:1 on canvas-soft, so text links on the page use primary-active (#005bab, 6.2:1);
+   * the primary button keeps primary (its white label is 4.6:1 on it).
+   */
+  --color-bg-page: var(--color-canvas-soft);
+  --color-bg-header: var(--color-canvas);
+  --color-bg-card: var(--color-surface);
+  --color-bg-well: var(--color-canvas-soft);
+  --color-bg-footer: var(--color-canvas-soft);
+  --color-bg-notice: rgba(0, 117, 222, 0.1);
+  --color-bg-kbd: var(--color-canvas-soft);
+  --color-text: var(--color-ink);
+  --color-text-secondary: var(--color-ink-secondary);
+  --color-text-muted: var(--color-ink-muted);
+  --color-link: var(--color-primary-active);
+  --color-footer-link: var(--color-ink-secondary);
+  --color-border: var(--color-hairline);
+  --color-focus-ring: var(--color-primary);
+  --color-button-primary-bg: var(--color-primary);
+  --color-button-primary-bg-active: var(--color-primary-active);
+  --color-button-primary-text: var(--color-on-primary);
+  --color-button-secondary-bg: var(--color-surface);
+  --color-button-secondary-bg-hover: var(--color-canvas-soft);
+  --color-button-secondary-text: var(--color-ink);
+  --color-button-secondary-border: var(--color-hairline);
+
+  /* The hero "night" band (design-tokens hero-band: secondary + on-primary; the one dark island) */
+  --color-hero-band: var(--color-secondary);
+  --color-hero-band-text: #ffffff;
+  --color-hero-focus-ring: #ffffff;
+  --color-hero-button-secondary-bg: var(--color-surface);
+  --color-hero-button-secondary-bg-hover: var(--color-canvas-soft);
+  --color-hero-button-secondary-text: var(--color-ink);
+  --color-hero-button-secondary-border: transparent;
+
+  /* The brand mark (T1 "墨流しの雫"; the same in both palettes, like the app icon) */
+  --color-brand-drop-ink: #000000;
+  --color-brand-drop-ink-soft: #31302e;
+  --color-brand-drop-light: #f6f5f4;
+
+  /*
+   * The hero picture's light band (the reflection of the night band above it). Normal
+   * blending: the indigo edges show on the picture's white parts (screen could not), the
+   * white core shows on its grey parts. Times --hero-glare-max (0.4), the densest point is
+   * 0.12 of each colour: white drops about 21% in luminance and the app's text keeps >= 3.8:1.
+   */
+  --color-hero-glare: rgba(255, 255, 255, 0.3);
+  --color-hero-glare-tint: rgba(33, 49, 131, 0.3);
+
+  /* Typography (docs/design-tokens.md "typography") */
+  --font-sans: 'Inter', 'Noto Sans JP', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Noto Sans JP', monospace;
+
+  --font-size-display-1: 64px;
+  --font-size-display-2: 54px;
+  --font-size-heading-1: 40px;
+  --font-size-heading-2: 26px;
+  --font-size-heading-3: 22px;
+  --font-size-title: 20px;
+  --font-size-body-md: 16px;
+  --font-size-body-sm: 15px;
+  --font-size-button: 16px;
+  --font-size-caption: 14px;
+  --font-size-eyebrow: 12px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-display-1: 1;
+  --line-height-display-2: 1.04;
+  --line-height-heading-1: 1.1;
+  --line-height-heading-2: 1.23;
+  --line-height-heading-3: 1.27;
+  --line-height-title: 1.4;
+  --line-height-body-md: 1.5;
+  --line-height-body-sm: 1.33;
+  --line-height-caption: 1.43;
+  --line-height-eyebrow: 1.33;
+  --line-height-prose: 1.8;
+
+  --letter-spacing-display-1: -2.125px;
+  --letter-spacing-display-2: -1.875px;
+  --letter-spacing-heading-1: -1px;
+  --letter-spacing-heading-2: -0.625px;
+  --letter-spacing-heading-3: -0.25px;
+  --letter-spacing-title: -0.125px;
+  --letter-spacing-eyebrow: 0.125px;
+
+  /* Radius (docs/design-tokens.md "rounded") */
+  --radius-xs: 4px;
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Spacing (docs/design-tokens.md "spacing"; base unit 8px) */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 28px;
+  --space-xxl: 32px;
+  --space-section: 96px;
+  --space-section-narrow: 64px;
+  --space-split: 48px; /* between the text and the picture of a feature row */
+
+  /* Shadows (docs/design-tokens.md "Elevation & Depth") */
+  --shadow-level-1:
+    rgba(0, 0, 0, 0.01) 0 0.175px 1.041px, rgba(0, 0, 0, 0.02) 0 0.8px 2.925px,
+    rgba(0, 0, 0, 0.027) 0 2.025px 7.847px, rgba(0, 0, 0, 0.04) 0 4px 18px;
+  --shadow-level-2:
+    rgba(0, 0, 0, 0.01) 0 1px 3px, rgba(0, 0, 0, 0.02) 0 3px 7px, rgba(0, 0, 0, 0.02) 0 7px 15px,
+    rgba(0, 0, 0, 0.04) 0 14px 28px, rgba(0, 0, 0, 0.05) 0 23px 52px;
+  /* The hero picture while hovered: one more near-transparent layer under Level 2 */
+  --shadow-hero-hover: rgba(0, 0, 0, 0.06) 0 32px 72px;
+
+  /* Layout */
+  --layout-max-width: 1200px;
+  --layout-prose-width: 760px;
+  --layout-gutter: var(--space-xxl); /* 32px */
+  --layout-gutter-narrow: var(--space-lg); /* 24px */
+  --layout-header-height: 64px;
+  --brand-mark-size: 28px;
+  --kbd-size-large: 20px; /* the shortcut keys of the text-only feature cards (title size) */
+  /*
+   * The part of the hero below the night band: the padding, the facts line and a little
+   * over half of the picture (the picture is 16:10, so its height is 0.625 x its width).
+   */
+  --hero-picture-width: min(
+    100vw - 2 * var(--layout-gutter),
+    var(--layout-max-width) - 2 * var(--layout-gutter)
+  );
+  --hero-band-tail: calc(
+    var(--space-section-narrow) + var(--space-xxl) + var(--space-lg) + 0.34 *
+      var(--hero-picture-width)
+  );
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --touch-target-min: 44px;
+
+  /* The hero picture's tilt (main.js reads these; designer's values, Sprint 40) */
+  --hero-perspective: 1600px;
+  --hero-tilt-max: 4; /* degrees at the picture's edge */
+  --hero-tilt-return: 0.06; /* share of the remaining tilt removed each frame after the cursor leaves (about 0.8s to 95%) */
+  --hero-glare-max: 0.4; /* opacity of the light band at the strongest tilt */
+
+  /*
+   * The fade-in on the top page (Sprint 41; designer's values). design-tokens.md has no motion
+   * scale, so these are kept quiet: a short rise (half the 24px limit), a decelerating curve
+   * without overshoot (easeOutCubic), a small stagger. Limits of the contract: distance <= 24px,
+   * one element <= 800ms, every element of one screen shown within 1.2s (duration + the largest
+   * stagger delay; main.js caps the delay at --reveal-total-max - --reveal-duration = 640ms).
+   */
+  --reveal-distance: 12px;
+  --reveal-duration: 560ms;
+  --reveal-easing: cubic-bezier(0.22, 0.61, 0.36, 1); /* easeOutCubic */
+  --reveal-stagger: 60ms; /* delay between elements entering the screen together */
+  --reveal-total-max: 1200ms;
+  --reveal-threshold: 0.15; /* share of an element on screen before it is shown */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    /* docs/design-references/dark-palette.md */
+    --color-primary: #62aef0;
+    --color-primary-active: #62aef0;
+    --color-on-primary: #191817;
+    --color-canvas: #191817;
+    --color-canvas-soft: #232220;
+    --color-surface: #232220;
+    --color-ink: #ffffff;
+    --color-ink-secondary: #ffffff;
+    --color-ink-muted: rgba(255, 255, 255, 0.6);
+    --color-hairline: rgba(255, 255, 255, 0.12);
+
+    /* The page on canvas (#191817), cards and wells one step up (#232220) */
+    --color-bg-page: var(--color-canvas);
+    --color-bg-header: var(--color-canvas);
+    --color-bg-card: var(--color-surface);
+    --color-bg-well: var(--color-canvas);
+    --color-bg-footer: var(--color-canvas);
+    --color-bg-notice: rgba(98, 174, 240, 0.16);
+    --color-bg-kbd: var(--color-canvas);
+    --color-link: var(--color-primary);
+    --color-button-secondary-bg: transparent;
+    --color-button-secondary-bg-hover: var(--color-canvas-soft); /* #232220 */
+    --color-button-secondary-text: #ffffff;
+    --color-button-secondary-border: #ffffff;
+
+    /* The night band keeps its indigo; its second button is the dark palette's (transparent, white) */
+    --color-hero-button-secondary-bg: transparent;
+    --color-hero-button-secondary-bg-hover: var(--color-canvas-soft); /* #232220 */
+    --color-hero-button-secondary-text: #ffffff;
+    --color-hero-button-secondary-border: #ffffff;
+  }
+}
+
+/* Phones: the narrower gutter (design-tokens "Mobile ≤600px") */
+@media (max-width: 600px) {
+  :root {
+    --layout-gutter: var(--layout-gutter-narrow);
+    --space-split: var(--space-lg);
+  }
+}

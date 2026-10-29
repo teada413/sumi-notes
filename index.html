@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Sumi Notes — 保存も、整理も、もう迷わない。</title>
+    <meta
+      name="description"
+      content="書いたメモの居場所が、いつも分かる。Sumi Notes は、書いた内容を自動で保存し、自分で選んだフォルダに Markdown 形式のファイル（.md）として残す、Windows のノートアプリです。"
+    />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/site.css" />
+    <script src="js/config.js" defer></script>
+    <!-- main.js は defer にしない: 表示の前に <html> に .reveal-ready を付けるため。ページの処理は DOMContentLoaded（config.js の後）で始める -->
+    <script src="js/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header" data-testid="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html" data-testid="brand-link">
+          <svg class="brand__mark" viewBox="107 47 810 930" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient
+                id="brand-ink"
+                gradientUnits="userSpaceOnUse"
+                cx="422"
+                cy="526"
+                r="468"
+              >
+                <stop offset="0" class="brand__stop-ink-soft" />
+                <stop offset="0.6" class="brand__stop-ink" />
+              </radialGradient>
+            </defs>
+            <path
+              class="brand__rim"
+              d="M 512.0 76.9 L 766.6 331.4 A 360 360 0 1 1 257.4 331.4 Z"
+              fill="url(#brand-ink)"
+              stroke-width="60"
+              stroke-linejoin="round"
+            />
+            <ellipse
+              class="brand__light"
+              cx="362"
+              cy="556"
+              rx="48"
+              ry="104"
+              transform="rotate(-28 362 556)"
+              opacity="0.9"
+            />
+          </svg>
+          <span class="brand__name">Sumi Notes</span>
+        </a>
+        <nav class="site-nav" aria-label="ページ内の案内">
+          <ul class="site-nav__list">
+            <li><a class="site-nav__link" href="#features" data-testid="nav-features">特徴</a></li>
+            <li>
+              <a class="site-nav__link" href="#download" data-testid="nav-download">入手の方法</a>
+            </li>
+            <li>
+              <a class="site-nav__link" href="privacy.html" data-testid="nav-privacy"
+                >プライバシーポリシー</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title" data-testid="hero">
+        <div class="hero__inner">
+          <div class="hero__text">
+            <!-- prettier-ignore -->
+            <h1 id="hero-title" class="hero__title" data-reveal="hero-title">保存も、整理も、もう迷わない。</h1>
+            <p class="hero__lead" data-reveal="hero-lead">
+              <span class="hero__hook">書いたメモの居場所が、いつも分かる。</span
+              ><span class="hero__name">Sumi Notes</span>
+              は、書いた内容を自動で保存し、自分で選んだフォルダに Markdown
+              形式のファイル（.md）として残す、Windows
+              のノートアプリです。保存の操作は不要です。ノートはノートブック・ステータス・タグで整理でき、全文検索ですぐに見つけられます。
+            </p>
+            <div class="hero__actions" data-reveal="hero-actions">
+              <a
+                class="button button--primary"
+                href="#download"
+                data-store-link
+                data-testid="download-button-hero"
+                >Microsoft Store から入手</a
+              >
+              <a class="button button--secondary" href="#features" data-testid="features-button"
+                >特徴を見る</a
+              >
+            </div>
+          </div>
+          <div class="hero__figure" data-reveal="hero-figure">
+            <div class="hero-shot" data-hero-tilt data-testid="hero-shot">
+              <img
+                class="hero-shot__image"
+                src="images/hero.png"
+                width="1280"
+                height="800"
+                alt="Sumi Notes の画面。左から、ノートブック・ステータス・タグの欄、ノートの一覧、旅行の計画のノートが並んでいます。ノートは Markdown の編集画面とプレビューを左右に並べて表示し、プレビューには表・写真・チェックボックスが表示されています。"
+                data-testid="hero-image"
+              />
+            </div>
+          </div>
+          <ul
+            class="hero__facts"
+            data-reveal="hero-facts"
+            aria-label="Sumi Notes について"
+            data-testid="hero-facts"
+          >
+            <li class="chip">Windows 用</li>
+            <li class="chip">無料</li>
+            <li class="chip chip--wide">Markdown 形式のファイル（.md）で保存</li>
+            <li class="chip">オフラインで動作</li>
+          </ul>
+        </div>
+      </section>
+
+      <section
+        id="features"
+        class="section features"
+        aria-labelledby="features-title"
+        data-testid="features"
+      >
+        <div class="section__inner">
+          <h2 id="features-title" class="section__title" tabindex="-1" data-reveal="features-title">
+            特徴
+          </h2>
+          <ul class="features__grid">
+            <li
+              class="feature-card feature-card--keys"
+              data-testid="feature-card"
+              data-reveal="feature-card"
+            >
+              <h3 class="feature-card__title">ノートは Markdown 形式のファイル（.md）</h3>
+              <p class="feature-card__text">
+                ノートは、自分で選んだフォルダに Markdown
+                形式のファイル（.md）として保存されます。ほかのエディタでも開くことができ、そこで加えた変更も、そのまま画面に反映されます。
+              </p>
+              <p class="feature-card__keys">
+                <kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span><kbd class="kbd">N</kbd>
+                <span class="feature-card__key-label">新しいノート</span>
+              </p>
+            </li>
+            <li
+              class="feature-card feature-card--wide"
+              data-testid="feature-card"
+              data-reveal="feature-card"
+            >
+              <h3 class="feature-card__title">日本語も1文字から検索できる</h3>
+              <p class="feature-card__text">
+                全文検索は1文字からの部分一致です。全角と半角、大文字と小文字を区別せずに検索し、見つかった箇所を一覧の中で強調して表示します。
+              </p>
+              <p class="feature-card__keys">
+                <kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                ><kbd class="kbd">Shift</kbd><span class="kbd-plus">+</span><kbd class="kbd">F</kbd>
+                <span class="feature-card__key-label">ノートを検索</span>
+              </p>
+              <img
+                class="feature-card__image"
+                src="images/feature-search.png"
+                width="1040"
+                height="650"
+                loading="lazy"
+                alt="「索引」で検索した画面。ノートの一覧の題名と本文の抜粋で、「索引」の文字が強調されています。"
+                data-testid="feature-image"
+              />
+            </li>
+            <li
+              class="feature-card feature-card--wide feature-card--flip"
+              data-testid="feature-card"
+              data-reveal="feature-card"
+            >
+              <h3 class="feature-card__title">ステータスとタグで整理できる</h3>
+              <p class="feature-card__text">
+                ノートブック（入れ子にできます）、ステータス（進行中・保留・完了・中止）、色を付けられるタグでノートを整理します。よく使うノートは、一覧の上にピン留めできます。
+              </p>
+              <img
+                class="feature-card__image"
+                src="images/feature-status-tags.png"
+                width="1040"
+                height="650"
+                loading="lazy"
+                alt="ステータス「進行中」で絞り込んだノートの一覧と、不具合の調査のノート。一覧の各ノートに、色の付いたタグが並んでいます。"
+                data-testid="feature-image"
+              />
+            </li>
+            <li
+              class="feature-card feature-card--wide"
+              data-testid="feature-card"
+              data-reveal="feature-card"
+            >
+              <h3 class="feature-card__title">すぐに使えるテンプレートが 29 個</h3>
+              <p class="feature-card__text">
+                日報・議事録・旅行の計画・不具合の修正など、29
+                個のテンプレートを用意しています。自分で作成したテンプレートも使用できます。
+              </p>
+              <p class="feature-card__keys">
+                <kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span><kbd class="kbd">T</kbd>
+                <span class="feature-card__key-label">テンプレートから作成</span>
+              </p>
+              <img
+                class="feature-card__image"
+                src="images/feature-templates.png"
+                width="1040"
+                height="650"
+                loading="lazy"
+                alt="テンプレートを選ぶ画面。左にテンプレートの名前の一覧、右に選んだ「日報」の内容の見本が表示されています。"
+                data-testid="feature-image"
+              />
+            </li>
+            <li
+              class="feature-card feature-card--keys"
+              data-testid="feature-card"
+              data-reveal="feature-card"
+            >
+              <h3 class="feature-card__title">ノート同士をリンクでつなげる</h3>
+              <p class="feature-card__text">
+                [[
+                と入力すると、ほかのノートの題名が候補として表示され、リンクを挿入できます。リンク先のノートでは、どのノートからリンクされているか（バックリンク）を確認できます。
+              </p>
+              <p class="feature-card__keys">
+                <kbd class="kbd">[</kbd><kbd class="kbd">[</kbd>
+                <span class="feature-card__key-label">ノートへのリンクを挿入</span>
+              </p>
+            </li>
+            <li
+              class="feature-card feature-card--wide feature-card--flip"
+              data-testid="feature-card"
+              data-reveal="feature-card"
+            >
+              <h3 class="feature-card__title">改訂履歴から前の版に戻せる</h3>
+              <p class="feature-card__text">
+                入力が止まるたびに、本文の版が改訂履歴に残ります。前の版との違いを確認して、元に戻すことができます。削除したノートはゴミ箱に移り、あとから復元できます。
+              </p>
+              <img
+                class="feature-card__image"
+                src="images/feature-history.png"
+                width="1040"
+                height="720"
+                loading="lazy"
+                alt="議事録のノートの改訂履歴の画面。左に版の一覧、右に選んだ版の本文が表示されています。"
+                data-testid="feature-image"
+              />
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section
+        id="download"
+        class="section download"
+        aria-labelledby="download-title"
+        data-testid="download"
+      >
+        <div class="section__inner">
+          <h2 id="download-title" class="section__title" tabindex="-1" data-reveal="download-title">
+            入手の方法
+          </h2>
+          <p
+            class="download__notice"
+            data-reveal="download-notice"
+            data-store-pending
+            data-testid="store-pending"
+          >
+            Microsoft Store で公開の準備中です。公開後は、このページのボタンから Microsoft Store
+            のページへ移動できます。
+          </p>
+          <dl class="download__list" data-reveal="download-list">
+            <div class="download__row">
+              <dt class="download__term">入手先</dt>
+              <dd class="download__desc">Microsoft Store</dd>
+            </div>
+            <div class="download__row">
+              <dt class="download__term">価格</dt>
+              <dd class="download__desc">無料</dd>
+            </div>
+            <div class="download__row">
+              <dt class="download__term">対応 OS</dt>
+              <dd class="download__desc">
+                <span class="download__line"
+                  ><span class="download__phrase">Windows 10（バージョン 2004 以降）</span
+                  ><span class="download__phrase">または Windows 11</span></span
+                ><span class="download__line"
+                  ><span class="download__phrase">64 ビット版（x64）</span></span
+                >
+              </dd>
+            </div>
+            <div class="download__row">
+              <dt class="download__term">アカウント</dt>
+              <dd class="download__desc">登録不要</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="section closing" aria-labelledby="closing-title" data-testid="closing">
+        <div class="section__inner closing__inner">
+          <h2 id="closing-title" class="section__title" data-reveal="closing-title">
+            書いたノートを、ずっと自分の手元に。
+          </h2>
+          <p class="closing__text" data-reveal="closing-text">
+            利用者の情報を収集せず、どこにも送信しません。インターネットに接続していない環境でも使用できます。
+          </p>
+          <a
+            class="button button--primary"
+            href="#download"
+            data-store-link
+            data-testid="download-button-closing"
+            data-reveal="closing-action"
+            >Microsoft Store から入手</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-testid="site-footer">
+      <div class="site-footer__inner">
+        <a class="brand brand--footer" href="index.html">
+          <svg class="brand__mark" viewBox="107 47 810 930" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient
+                id="brand-ink-footer"
+                gradientUnits="userSpaceOnUse"
+                cx="422"
+                cy="526"
+                r="468"
+              >
+                <stop offset="0" class="brand__stop-ink-soft" />
+                <stop offset="0.6" class="brand__stop-ink" />
+              </radialGradient>
+            </defs>
+            <path
+              class="brand__rim"
+              d="M 512.0 76.9 L 766.6 331.4 A 360 360 0 1 1 257.4 331.4 Z"
+              fill="url(#brand-ink-footer)"
+              stroke-width="60"
+              stroke-linejoin="round"
+            />
+            <ellipse
+              class="brand__light"
+              cx="362"
+              cy="556"
+              rx="48"
+              ry="104"
+              transform="rotate(-28 362 556)"
+              opacity="0.9"
+            />
+          </svg>
+          <span class="brand__name">Sumi Notes</span>
+        </a>
+        <ul class="site-footer__links">
+          <li>
+            <a class="site-footer__link" href="privacy.html" data-testid="footer-privacy"
+              >プライバシーポリシー</a
+            >
+          </li>
+          <li>
+            お問い合わせ:
+            <a
+              class="site-footer__link"
+              href="mailto:sumi.notes.support@gmail.com"
+              data-testid="footer-contact"
+              >sumi.notes.support@gmail.com</a
+            >
+          </li>
+        </ul>
+        <p class="site-footer__copyright" data-testid="footer-copyright">© 2026 Sumi Notes</p>
+      </div>
+    </footer>
+  </body>
+</html>
