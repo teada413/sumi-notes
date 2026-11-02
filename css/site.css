@@ -3,7 +3,7 @@
  * 値はすべて tokens.css の変数を使う（1px の罫線など構造上の値を除く）。
  * ホバーで動くのはメインの画像（.hero-shot）だけ。ボタン・カード・ほかの画像は、ホバーで色や下線が変わるだけ。
  * トップのページの data-reveal の要素は、表示のときに下から少し上がりながら現れる（Sprint 41。
- * js/main.js（読み込まれてすぐの準備）が <html> に .reveal-ready を付けたときだけ。下の「表示のときのフェードイン」）。
+ * js/main.js（読み込まれてすぐの前処理）が <html> に .reveal-ready を付けたときだけ。下の「表示のときのフェードイン」）。
  */
 
 *,
@@ -191,16 +191,11 @@ kbd {
   background: var(--color-button-secondary-bg-hover);
 }
 
-/* --- ヒーロー（ページで1か所だけの藍の帯。画像の上半分までを帯に載せる） ------------------- */
+/* --- ヒーロー（ページのほかの部分と同じ地。帯は置かず、メインの画像は縁と影で地から分ける） ------ */
 
 .hero {
   padding: var(--space-section-narrow) 0;
-  /* 2色の境目だけの塗り分け（ぼかしの無い色の切り替え）。帯は画像の途中で終わる */
-  background: linear-gradient(
-    to bottom,
-    var(--color-hero-band) calc(100% - var(--hero-band-tail)),
-    var(--color-bg-page) 0
-  );
+  background: var(--color-bg-hero);
 }
 
 .hero__inner {
@@ -219,12 +214,8 @@ kbd {
   align-items: center;
   gap: var(--space-lg);
   max-width: var(--layout-prose-width);
-  color: var(--color-hero-band-text);
+  color: var(--color-hero-text);
   text-align: center;
-}
-
-.hero__text :focus-visible {
-  outline-color: var(--color-hero-focus-ring);
 }
 
 .hero__title {
@@ -260,18 +251,6 @@ kbd {
   margin-top: var(--space-xs);
 }
 
-.hero__actions .button--secondary {
-  background: var(--color-hero-button-secondary-bg);
-  color: var(--color-hero-button-secondary-text);
-  border-color: var(--color-hero-button-secondary-border);
-  box-shadow: var(--shadow-level-1);
-}
-
-.hero__actions .button--secondary:hover,
-.hero__actions .button--secondary:active {
-  background: var(--color-hero-button-secondary-bg-hover);
-}
-
 .hero__figure {
   width: 100%;
   margin-top: var(--space-md);
@@ -281,10 +260,10 @@ kbd {
 .hero-shot {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-hero-shot-border);
   border-radius: var(--radius-xl);
   background: var(--color-bg-card);
-  box-shadow: var(--shadow-level-2);
+  box-shadow: var(--shadow-hero-shot);
   transform: none;
 }
 
@@ -296,7 +275,7 @@ kbd {
 
 /* ホバー中は影を一段深く（同じ Level 2 の最後の段を強める） */
 .hero-shot.is-hovered {
-  box-shadow: var(--shadow-level-2), var(--shadow-hero-hover);
+  box-shadow: var(--shadow-hero-shot), var(--shadow-hero-hover);
 }
 
 /* 斜めの光の帯（傾きに合わせて位置と濃さが変わる） */
@@ -462,7 +441,14 @@ kbd {
   box-shadow: var(--shadow-level-1);
 }
 
-/* 文字だけのカード（feature-card: surface・rounded.lg・padding 24px・罫線） */
+/* 文字だけのカードに置く図（最初のカードの、フォルダに .md のファイルが並ぶ様子の図） */
+.feature-card__figure {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+/* 文字だけのカード（feature-card: surface・rounded.lg・padding 24px・罫線）。下の段はキーのくぼみか図 */
 .feature-card--keys {
   order: 1;
   /* 説明の行が余りの高さを受け持ち、キーのくぼみを下端にそろえる（margin: auto を使わない） */
@@ -557,13 +543,10 @@ kbd {
   grid-column: 1;
 }
 
-.download__notice {
+.download__text {
   grid-column: 1;
   margin: 0;
-  padding: var(--space-md) var(--space-lg);
-  border-radius: var(--radius-lg);
-  background: var(--color-bg-notice);
-  color: var(--color-text);
+  color: var(--color-text-secondary);
   line-height: var(--line-height-prose);
 }
 
@@ -735,10 +718,6 @@ kbd {
   font-size: var(--font-size-caption);
 }
 
-.prose__pending {
-  font-weight: var(--font-weight-semibold);
-}
-
 .prose h2 {
   margin: var(--space-split) 0 var(--space-sm);
   font-size: var(--font-size-heading-2);
@@ -817,7 +796,7 @@ kbd {
     grid-template-rows: none;
   }
 
-  .download__notice {
+  .download__text {
     margin-bottom: var(--space-lg);
   }
 
@@ -873,6 +852,26 @@ kbd {
 
   .features__grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /*
+   * The first card's figure runs to the card's sides and bottom on phones (325px instead of
+   * 279px wide at 375px), so the file names in it stay readable. The card drops its side and
+   * bottom padding and the title and text keep theirs, so the figure stays inside the card's
+   * box; the card's border and rounded corners frame it, the figure keeps only the rule above.
+   */
+  .feature-card--keys:has(> .feature-card__figure) {
+    padding: var(--space-lg) 0 0;
+    overflow: hidden;
+  }
+
+  .feature-card--keys:has(> .feature-card__figure) > :not(.feature-card__figure) {
+    margin-inline: var(--space-lg);
+  }
+
+  .feature-card__figure {
+    border-width: 1px 0 0;
+    border-radius: 0;
   }
 
   .feature-card__title {
@@ -938,7 +937,7 @@ kbd {
 /* --- 表示のときのフェードイン（トップのページだけ） ----------------------------------------- */
 
 /*
- * 隠すのは、画面の表示で、動きを減らす設定が無く、js/main.js の準備が .reveal-ready を付けたときだけ。
+ * 隠すのは、画面の表示で、動きを減らす設定が無く、js/main.js の前処理が .reveal-ready を付けたときだけ。
  * 印刷・JavaScript なし・IntersectionObserver なし・reduced-motion では、最初からすべて見えている。
  * 変えるのは opacity と transform（縦の移動）だけ（レイアウトはずれない）。
  * メインの画像は、傾く .hero-shot ではなく、包む .hero__figure を動かす（傾きの transform とぶつけない）。

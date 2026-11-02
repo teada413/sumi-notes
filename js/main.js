@@ -1,8 +1,9 @@
 /*
  * Sumi Notes の公式サイトのスクリプト（ビルドなし・外部の読み込みなし）。
  *
- * 1. ダウンロードのボタン: config.js の STORE_URL（1か所の定め）を、data-store-link の付いた
- *    すべてのリンクに入れる。STORE_URL が "#download" の間は「公開の準備中です」を出す。
+ * 1. ダウンロードのボタン: config.js の STORE_URL（1か所の定め。Microsoft Store のページ）を、
+ *    data-store-link の付いたすべてのリンクに入れる。押すと同じタブで Store のページへ移る
+ *    （target は付けない）。Store のページの https: の URL でないときは、HTML の控えの "#download" のままにする。
  * 2. メインの画像の傾き: カーソルの位置に合わせて画像を傾け、斜めの光の帯を動かす。
  *    カーソルが離れたら、少しずつ（減衰しながら）傾き 0 に戻る。
  *    prefers-reduced-motion: reduce のとき、ホバーの無い画面（タッチ）、マウス以外のポインタでは動かさない。
@@ -12,15 +13,16 @@
  *    prefers-reduced-motion: reduce のときは、途中を通らずに一瞬で移る。
  * 4. 表示のときのフェードイン（トップのページの data-reveal の要素）: 画面に入ったら（IntersectionObserver）
  *    .is-revealed を付けて現れさせる。同じときに入った要素は少しずつずらす。1回だけ。
- *    0. の準備が <html> に .reveal-ready を付けたときだけ動く（付いていなければ何もしない＝すべて見えている）。
+ *    0. の前処理が <html> に .reveal-ready を付けたときだけ動く（付いていなければ何もしない＝すべて見えている）。
  *    ページの中のリンク・# 付きのアドレスで移るときは、移った先とそれより上の要素を、動かさずにすぐ見せる。
  */
 ;(function () {
   'use strict'
 
-  var PENDING = '#download'
+  /** ボタンの HTML に書いてある控え（JavaScript が動かないとき・STORE_URL が正しくないとき）。 */
+  var FALLBACK = '#download'
 
-  // --- 0. 表示のときのフェードインの準備（読み込まれてすぐ、表示の前に） ---------------------
+  // --- 0. 表示のときのフェードインの前処理（読み込まれてすぐ、表示の前に） -------------------
   //
   // 次の条件がそろったときだけ、<html> に "reveal-ready" を付ける。site.css は、このクラスがあるときだけ
   // data-reveal の要素を隠す（JavaScript が動かないときは、最初からすべて見えている）。
@@ -45,26 +47,26 @@
   function storeUrl() {
     var config = window.SUMI_SITE_CONFIG
     var url = config && typeof config.STORE_URL === 'string' ? config.STORE_URL.trim() : ''
-    if (url === PENDING) return PENDING
-    // Store のページは https: だけを受け付ける。それ以外（空・別の形）は準備中の扱いにする。
-    return /^https:\/\/[^\s"'<>]+$/i.test(url) ? url : PENDING
+    // Microsoft Store のページ（https://apps.microsoft.com/…）だけを受け付ける。
+    // それ以外（空・http:・別のサイト・別の形）のときは控えの #download を使う。
+    return /^https:\/\/apps\.microsoft\.com\/[^\s"'<>]+$/i.test(url) ? url : FALLBACK
   }
 
   function applyStoreLink() {
     var url = storeUrl()
-    var pending = url === PENDING
+    var external = url !== FALLBACK
     var links = document.querySelectorAll('a[data-store-link]')
     for (var i = 0; i < links.length; i++) {
       links[i].setAttribute('href', url)
-      if (pending) {
-        // "#download" を指す間は、3. のページの中のリンクとして扱う（滑らかなスクロールとフォーカス）
-        links[i].removeAttribute('rel')
-      } else {
+      // 同じタブで移る: target は付けない（HTML にあっても外す）
+      links[i].removeAttribute('target')
+      if (external) {
         links[i].setAttribute('rel', 'noopener noreferrer')
+      } else {
+        // "#download" を指すときは、3. のページの中のリンクとして扱う（滑らかなスクロールとフォーカス）
+        links[i].removeAttribute('rel')
       }
     }
-    var notices = document.querySelectorAll('[data-store-pending]')
-    for (var j = 0; j < notices.length; j++) notices[j].hidden = !pending
   }
 
   // --- 2. メインの画像の傾き ------------------------------------------------------------
@@ -324,7 +326,7 @@
     // ずらす間隔の上限: 1つの画面の要素が、すべて totalMax 以内に現れ終わるように
     var maxDelay = Math.max(0, totalMax - duration)
 
-    var pending = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'))
+    var unrevealed = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'))
     var observer = new window.IntersectionObserver(onEntries, { threshold: threshold })
 
     function show(el, delay, instant) {
@@ -332,14 +334,14 @@
       else el.style.setProperty('--reveal-delay', Math.round(delay) + 'ms')
       el.classList.add('is-revealed')
       observer.unobserve(el)
-      var i = pending.indexOf(el)
-      if (i >= 0) pending.splice(i, 1)
+      var i = unrevealed.indexOf(el)
+      if (i >= 0) unrevealed.splice(i, 1)
     }
 
     function onEntries(entries) {
       var entering = entries
         .filter(function (e) {
-          return e.isIntersecting && pending.indexOf(e.target) >= 0
+          return e.isIntersecting && unrevealed.indexOf(e.target) >= 0
         })
         .map(function (e) {
           return e.target
@@ -352,7 +354,7 @@
         show(el, Math.min(i * stagger, maxDelay), false)
       })
       // 一気に通り過ぎた（画面に入らないまま上へ行った）要素は、見えないまま残さず、すぐに見せる
-      pending.slice().forEach(function (el) {
+      unrevealed.slice().forEach(function (el) {
         if (el.getBoundingClientRect().bottom <= 0) show(el, 0, true)
       })
     }
@@ -360,7 +362,7 @@
     /** スクロールの位置 y で画面の下端より上にある要素を、動かさずにすぐ見せる。 */
     revealUpTo = function (y) {
       var bottom = y + window.innerHeight
-      pending.slice().forEach(function (el) {
+      unrevealed.slice().forEach(function (el) {
         if (el.getBoundingClientRect().top + window.scrollY < bottom) show(el, 0, true)
       })
     }
@@ -382,7 +384,7 @@
       })
     })
 
-    pending.forEach(function (el) {
+    unrevealed.forEach(function (el) {
       observer.observe(el)
     })
   }

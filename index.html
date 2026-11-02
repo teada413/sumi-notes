@@ -146,10 +146,15 @@
                 ノートは、自分で選んだフォルダに Markdown
                 形式のファイル（.md）として保存されます。ほかのエディタでも開くことができ、そこで加えた変更も、そのまま画面に反映されます。
               </p>
-              <p class="feature-card__keys">
-                <kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span><kbd class="kbd">N</kbd>
-                <span class="feature-card__key-label">新しいノート</span>
-              </p>
+              <img
+                class="feature-card__figure"
+                src="images/feature-files.png"
+                width="880"
+                height="640"
+                loading="lazy"
+                alt="ノートのフォルダの中を表した図。左に「Inbox」「使い方」のフォルダと、「日報」「議事録」「旅行の計画」などのノートが Markdown 形式のファイル（.md）として並び、右に開いた「旅行の計画」のファイルの先頭の、題名・ステータス・タグを書いた行と本文の数行が表示されています。"
+                data-testid="feature-files-image"
+              />
             </li>
             <li
               class="feature-card feature-card--wide"
@@ -266,14 +271,10 @@
           <h2 id="download-title" class="section__title" tabindex="-1" data-reveal="download-title">
             入手の方法
           </h2>
-          <p
-            class="download__notice"
-            data-reveal="download-notice"
-            data-store-pending
-            data-testid="store-pending"
-          >
-            Microsoft Store で公開の準備中です。公開後は、このページのボタンから Microsoft Store
-            のページへ移動できます。
+          <p class="download__text" data-reveal="download-text" data-testid="download-store">
+            Sumi Notes は、Microsoft Store から無料で入手できます。「Microsoft Store
+            から入手」のボタンを押すと、Microsoft Store の Sumi Notes のページが開きます。Microsoft
+            Store のアプリで「Sumi Notes」と検索しても見つかります。
           </p>
           <dl class="download__list" data-reveal="download-list">
             <div class="download__row">

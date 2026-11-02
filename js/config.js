@@ -1,11 +1,12 @@
 /*
  * ダウンロードのボタンのリンク先の定め（サイトの中でここ1か所だけ）。
  *
- * - 今は Microsoft Store のページが無いので、ページの中の「入手の方法」の節（#download）を指す。
- * - Microsoft Store で公開したら、下の STORE_URL を Store のページの URL（https: で始まるもの）に
- *   書き換える。index.html の data-store-link を付けたボタンが、すべてその URL を指すようになり、
- *   「公開の準備中です」の表示は消える。
+ * - Sumi Notes は 2026-11-02 に Microsoft Store で公開された（1.0.1）。STORE_URL は Store のページの URL。
+ * - index.html の data-store-link を付けたボタン（ヒーローと締め）は、main.js がすべてこの URL に向ける。
+ *   押すと、同じタブで Store のページへ移る（新しいタブは開かない）。
+ * - 受け付けるのは https://apps.microsoft.com/ で始まる URL だけ。それ以外の値のときは、ボタンはページの中の
+ *   「入手の方法」の節（#download。HTML に書いてある控え）を指したままになる。
  */
 window.SUMI_SITE_CONFIG = Object.freeze({
-  STORE_URL: '#download'
+  STORE_URL: 'https://apps.microsoft.com/detail/9MWQTQW12S86'
 })
