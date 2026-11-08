@@ -167,6 +167,7 @@
   /* Layout */
   --layout-max-width: 1200px;
   --layout-prose-width: 760px;
+  --layout-changelog-aside: 160px; /* the changelog's number-and-date column (designer, Sprint 48) */
   --layout-gutter: var(--space-xxl); /* 32px */
   --layout-gutter-narrow: var(--space-lg); /* 24px */
   --layout-header-height: 64px;

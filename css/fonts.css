@@ -82,6 +82,15 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
+  src: url('../fonts/noto-sans-jp-88-400-normal.woff2') format('woff2');
+  unicode-range: U+25bd,U+4e59,U+4ec1,U+4ff3,U+515a,U+518a,U+525b,U+5375,U+552f,U+57a3,U+5b9c,U+5c3d,U+5e3d,U+5e7b,U+5f0a,U+6094,U+6458,U+654f,U+67f3,U+6b8a,U+6bd2,U+6c37,U+6ce1,U+6e56,U+6e7f,U+6ed1,U+6ede,U+6f0f,U+70ad,U+7267,U+7363,U+786c,U+7a42,U+7db2,U+7f85,U+8178,U+829d,U+8896,U+8c5a,U+8cb0,U+8ce2,U+8ed2,U+9047,U+9177,U+970a,U+9ea6,U+ff1b,U+ff31,U+ff39,U+ff80;
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
   src: url('../fonts/noto-sans-jp-89-400-normal.woff2') format('woff2');
   unicode-range: U+a5,U+4e80,U+4f34,U+4f73,U+4f75,U+511f,U+5192,U+52aa,U+53c8,U+570f,U+57cb,U+596e,U+5d8b,U+5f66,U+5fd9,U+62db,U+62f6,U+6328,U+633f,U+63a7,U+6469,U+6bbf,U+6c41,U+6c57,U+6d44,U+6dbc,U+706f,U+72c2,U+72ed,U+7551,U+75f4,U+7949,U+7e26,U+7fd4,U+8150,U+8af8,U+8b0e,U+8b72,U+8ca7,U+934b,U+9a0e,U+9a12,U+9b42,U+ff41,U+ff43,U+ff45,U+ff49,U+ff4f,U+ff62-ff63;
 }
@@ -354,6 +363,15 @@
   font-weight: 500;
   src: url('../fonts/noto-sans-jp-85-500-normal.woff2') format('woff2');
   unicode-range: U+25c7,U+3007,U+504f,U+507d,U+51a0,U+52a3,U+5410,U+5510,U+559a,U+5782,U+582a,U+5c0a,U+5c3f,U+5c48,U+5f6b,U+6176,U+622f,U+6279,U+62bd,U+62dd,U+65ed,U+67b6,U+6817,U+6850,U+6d6a,U+6deb,U+6ea2,U+6edd,U+6f5c,U+72e9,U+73a9,U+7573,U+76bf,U+7950,U+7956,U+7f8a,U+7ffc,U+80a2,U+80c3,U+83ca,U+8a02,U+8a13,U+8df5,U+9375,U+983b,U+99b4,U+ff4e,U+ff71,U+ff89,U+ff97;
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('../fonts/noto-sans-jp-88-500-normal.woff2') format('woff2');
+  unicode-range: U+25bd,U+4e59,U+4ec1,U+4ff3,U+515a,U+518a,U+525b,U+5375,U+552f,U+57a3,U+5b9c,U+5c3d,U+5e3d,U+5e7b,U+5f0a,U+6094,U+6458,U+654f,U+67f3,U+6b8a,U+6bd2,U+6c37,U+6ce1,U+6e56,U+6e7f,U+6ed1,U+6ede,U+6f0f,U+70ad,U+7267,U+7363,U+786c,U+7a42,U+7db2,U+7f85,U+8178,U+829d,U+8896,U+8c5a,U+8cb0,U+8ce2,U+8ed2,U+9047,U+9177,U+970a,U+9ea6,U+ff1b,U+ff31,U+ff39,U+ff80;
 }
 
 @font-face {
@@ -640,6 +658,15 @@
   font-style: normal;
   font-display: swap;
   font-weight: 600;
+  src: url('../fonts/noto-sans-jp-88-600-normal.woff2') format('woff2');
+  unicode-range: U+25bd,U+4e59,U+4ec1,U+4ff3,U+515a,U+518a,U+525b,U+5375,U+552f,U+57a3,U+5b9c,U+5c3d,U+5e3d,U+5e7b,U+5f0a,U+6094,U+6458,U+654f,U+67f3,U+6b8a,U+6bd2,U+6c37,U+6ce1,U+6e56,U+6e7f,U+6ed1,U+6ede,U+6f0f,U+70ad,U+7267,U+7363,U+786c,U+7a42,U+7db2,U+7f85,U+8178,U+829d,U+8896,U+8c5a,U+8cb0,U+8ce2,U+8ed2,U+9047,U+9177,U+970a,U+9ea6,U+ff1b,U+ff31,U+ff39,U+ff80;
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
   src: url('../fonts/noto-sans-jp-89-600-normal.woff2') format('woff2');
   unicode-range: U+a5,U+4e80,U+4f34,U+4f73,U+4f75,U+511f,U+5192,U+52aa,U+53c8,U+570f,U+57cb,U+596e,U+5d8b,U+5f66,U+5fd9,U+62db,U+62f6,U+6328,U+633f,U+63a7,U+6469,U+6bbf,U+6c41,U+6c57,U+6d44,U+6dbc,U+706f,U+72c2,U+72ed,U+7551,U+75f4,U+7949,U+7e26,U+7fd4,U+8150,U+8af8,U+8b0e,U+8b72,U+8ca7,U+934b,U+9a0e,U+9a12,U+9b42,U+ff41,U+ff43,U+ff45,U+ff49,U+ff4f,U+ff62-ff63;
 }
@@ -912,6 +939,15 @@
   font-weight: 700;
   src: url('../fonts/noto-sans-jp-85-700-normal.woff2') format('woff2');
   unicode-range: U+25c7,U+3007,U+504f,U+507d,U+51a0,U+52a3,U+5410,U+5510,U+559a,U+5782,U+582a,U+5c0a,U+5c3f,U+5c48,U+5f6b,U+6176,U+622f,U+6279,U+62bd,U+62dd,U+65ed,U+67b6,U+6817,U+6850,U+6d6a,U+6deb,U+6ea2,U+6edd,U+6f5c,U+72e9,U+73a9,U+7573,U+76bf,U+7950,U+7956,U+7f8a,U+7ffc,U+80a2,U+80c3,U+83ca,U+8a02,U+8a13,U+8df5,U+9375,U+983b,U+99b4,U+ff4e,U+ff71,U+ff89,U+ff97;
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('../fonts/noto-sans-jp-88-700-normal.woff2') format('woff2');
+  unicode-range: U+25bd,U+4e59,U+4ec1,U+4ff3,U+515a,U+518a,U+525b,U+5375,U+552f,U+57a3,U+5b9c,U+5c3d,U+5e3d,U+5e7b,U+5f0a,U+6094,U+6458,U+654f,U+67f3,U+6b8a,U+6bd2,U+6c37,U+6ce1,U+6e56,U+6e7f,U+6ed1,U+6ede,U+6f0f,U+70ad,U+7267,U+7363,U+786c,U+7a42,U+7db2,U+7f85,U+8178,U+829d,U+8896,U+8c5a,U+8cb0,U+8ce2,U+8ed2,U+9047,U+9177,U+970a,U+9ea6,U+ff1b,U+ff31,U+ff39,U+ff80;
 }
 
 @font-face {

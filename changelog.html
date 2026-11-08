@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <title>更新履歴 — Sumi Notes</title>
+    <meta
+      name="description"
+      content="Windows のノートアプリ「Sumi Notes」の更新履歴です。版ごとの変更を、新しい順に載せています。"
+    />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/site.css" />
+    <!-- main.js: ページの中のリンク（#v1.0.3 など）の滑らかなスクロール。このページには data-reveal が無いので、フェードインは起きない -->
+    <script src="js/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header" data-testid="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html" data-testid="brand-link">
+          <svg class="brand__mark" viewBox="107 47 810 930" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient
+                id="brand-ink"
+                gradientUnits="userSpaceOnUse"
+                cx="422"
+                cy="526"
+                r="468"
+              >
+                <stop offset="0" class="brand__stop-ink-soft" />
+                <stop offset="0.6" class="brand__stop-ink" />
+              </radialGradient>
+            </defs>
+            <path
+              class="brand__rim"
+              d="M 512.0 76.9 L 766.6 331.4 A 360 360 0 1 1 257.4 331.4 Z"
+              fill="url(#brand-ink)"
+              stroke-width="60"
+              stroke-linejoin="round"
+            />
+            <ellipse
+              class="brand__light"
+              cx="362"
+              cy="556"
+              rx="48"
+              ry="104"
+              transform="rotate(-28 362 556)"
+              opacity="0.9"
+            />
+          </svg>
+          <span class="brand__name">Sumi Notes</span>
+        </a>
+        <nav class="site-nav" aria-label="サイトの案内">
+          <ul class="site-nav__list">
+            <li>
+              <a class="site-nav__link" href="index.html#features" data-testid="nav-features"
+                >特徴</a
+              >
+            </li>
+            <li>
+              <a class="site-nav__link" href="index.html#download" data-testid="nav-download"
+                >入手の方法</a
+              >
+            </li>
+            <li>
+              <a class="site-nav__link" href="privacy.html" data-testid="nav-privacy"
+                >プライバシーポリシー</a
+              >
+            </li>
+            <li>
+              <a
+                class="site-nav__link"
+                href="changelog.html"
+                aria-current="page"
+                data-testid="nav-changelog"
+                >更新履歴</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="prose-page">
+      <article class="prose changelog" data-testid="changelog">
+        <h1 class="prose__title">Sumi Notes の更新履歴</h1>
+
+        <p class="changelog__lead" data-testid="changelog-lead">
+          Sumi Notes の版ごとの変更を、新しい順に載せています。日付は、Microsoft Store
+          で公開した日です。
+        </p>
+
+        <nav class="changelog__index" aria-label="版の一覧" data-testid="changelog-index">
+          <ul class="changelog__index-list">
+            <li>
+              <a class="changelog__index-link" href="#v1.0.3" data-testid="changelog-index-1.0.3"
+                >1.0.3</a
+              >
+            </li>
+            <li>
+              <a class="changelog__index-link" href="#v1.0.1" data-testid="changelog-index-1.0.1"
+                >1.0.1</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <section class="changelog__release" data-testid="release-1.0.3" data-version="1.0.3">
+          <h2 class="changelog__version" id="v1.0.3" data-testid="release-version-1.0.3">1.0.3</h2>
+          <p class="changelog__date" data-testid="release-date-1.0.3">
+            公開日: <time datetime="2026-11-09">2026年11月9日</time>
+          </p>
+          <ul class="changelog__changes" data-testid="release-changes-1.0.3">
+            <li>
+              「編集のみ」と「プレビューのみ」の表示で、本文がウィンドウの幅に合わせて広がるようになりました。「左右に並べる」表示は変わりません。
+            </li>
+            <li>
+              複数行を選んだときに、行によって選択範囲の色が1文字目からずれて表示される不具合を直しました。
+            </li>
+          </ul>
+        </section>
+
+        <section class="changelog__release" data-testid="release-1.0.1" data-version="1.0.1">
+          <h2 class="changelog__version" id="v1.0.1" data-testid="release-version-1.0.1">1.0.1</h2>
+          <p class="changelog__date" data-testid="release-date-1.0.1">
+            公開日: <time datetime="2026-11-02">2026年11月2日</time>
+          </p>
+          <ul class="changelog__changes" data-testid="release-changes-1.0.1">
+            <li>最初の版として、Microsoft Store で公開しました。</li>
+          </ul>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer" data-testid="site-footer">
+      <div class="site-footer__inner">
+        <a class="brand brand--footer" href="index.html">
+          <svg class="brand__mark" viewBox="107 47 810 930" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient
+                id="brand-ink-footer"
+                gradientUnits="userSpaceOnUse"
+                cx="422"
+                cy="526"
+                r="468"
+              >
+                <stop offset="0" class="brand__stop-ink-soft" />
+                <stop offset="0.6" class="brand__stop-ink" />
+              </radialGradient>
+            </defs>
+            <path
+              class="brand__rim"
+              d="M 512.0 76.9 L 766.6 331.4 A 360 360 0 1 1 257.4 331.4 Z"
+              fill="url(#brand-ink-footer)"
+              stroke-width="60"
+              stroke-linejoin="round"
+            />
+            <ellipse
+              class="brand__light"
+              cx="362"
+              cy="556"
+              rx="48"
+              ry="104"
+              transform="rotate(-28 362 556)"
+              opacity="0.9"
+            />
+          </svg>
+          <span class="brand__name">Sumi Notes</span>
+        </a>
+        <ul class="site-footer__links">
+          <li>
+            <a class="site-footer__link" href="privacy.html" data-testid="footer-privacy"
+              >プライバシーポリシー</a
+            >
+          </li>
+          <li>
+            <a class="site-footer__link" href="changelog.html" data-testid="footer-changelog"
+              >更新履歴</a
+            >
+          </li>
+          <li>
+            お問い合わせ:
+            <a
+              class="site-footer__link"
+              href="mailto:sumi.notes.support@gmail.com"
+              data-testid="footer-contact"
+              >sumi.notes.support@gmail.com</a
+            >
+          </li>
+        </ul>
+        <p class="site-footer__copyright" data-testid="footer-copyright">© 2026 Sumi Notes</p>
+      </div>
+    </footer>
+  </body>
+</html>

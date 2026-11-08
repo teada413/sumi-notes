@@ -757,6 +757,98 @@ kbd {
   font-size: var(--font-size-caption);
 }
 
+/* --- 更新履歴（changelog.html。プライバシーポリシーと同じ .prose の作り） ---------------------- */
+
+/*
+ * The page keeps the privacy page's column, title and rules. What it adds:
+ * - the lead in secondary ink, then the list of versions as small utility buttons
+ *   (button-utility: surface, hairline, 8px corners, button type), closed by a hairline
+ *   like the privacy page's date line;
+ * - each version as one row between hairlines: the number and the date in a narrow column
+ *   on the left, the changes on the right, so the numbers line up down the page and the
+ *   eye can run down them. Phones stack the three.
+ */
+
+.prose .changelog__lead {
+  margin-bottom: var(--space-lg);
+  color: var(--color-text-secondary);
+}
+
+.changelog__index {
+  padding-bottom: var(--space-xxl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.prose .changelog__index-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.prose .changelog__index-list li + li {
+  margin-top: 0;
+}
+
+.prose .changelog__index-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+  padding: 0 var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body-md);
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+}
+
+.prose .changelog__index-link:hover {
+  border-color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.changelog__release {
+  display: grid;
+  grid-template-columns: var(--layout-changelog-aside) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  column-gap: var(--space-lg);
+  padding: var(--space-xxl) 0;
+}
+
+.changelog__release + .changelog__release {
+  border-top: 1px solid var(--color-border);
+}
+
+.prose .changelog__version {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.prose .changelog__date {
+  grid-column: 1;
+  grid-row: 2;
+  margin: var(--space-xxs) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+.prose .changelog__changes {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin: 0;
+}
+
 /* --- 幅ごとの並び（design-tokens の Desktop / Tablet / Mobile） ------------------------------ */
 
 @media (max-width: 1079px) {
@@ -807,8 +899,24 @@ kbd {
 }
 
 @media (max-width: 600px) {
+  /*
+   * Phones: the four links take their own full-width row under the name, in caption size
+   * (14px), spread from gutter to gutter. At 375px they need 294px of the 327px, so they stay
+   * on one line (at 15px with the 16px gap the fourth link fell to a third row of its own).
+   * Narrower than about 330px they wrap again.
+   */
+  .site-nav {
+    flex-basis: 100%;
+  }
+
   .site-nav__list {
-    gap: 0 var(--space-md);
+    justify-content: space-between;
+    gap: 0 var(--space-xs);
+  }
+
+  .site-nav__link {
+    font-size: var(--font-size-caption);
+    line-height: var(--line-height-caption);
   }
 
   .hero {
@@ -898,6 +1006,15 @@ kbd {
 
   .prose h2 {
     margin-top: var(--space-xxl);
+  }
+
+  .changelog__release {
+    display: block;
+    padding: var(--space-lg) 0;
+  }
+
+  .prose .changelog__changes {
+    margin-top: var(--space-sm);
   }
 }
 
