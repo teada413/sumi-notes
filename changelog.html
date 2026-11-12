@@ -11,7 +11,7 @@
     <title>更新履歴 — Sumi Notes</title>
     <meta
       name="description"
-      content="Windows のノートアプリ「Sumi Notes」の更新履歴です。版ごとの変更を、新しい順に載せています。"
+      content="Windows のノートアプリ「Sumi Notes」の更新履歴です。バージョンごとの変更を、新しい順に載せています。"
     />
     <link rel="alternate" hreflang="ja" href="changelog.html" />
     <link rel="alternate" hreflang="en" href="en/changelog.html" />
@@ -119,12 +119,17 @@
         <h1 class="prose__title">Sumi Notes の更新履歴</h1>
 
         <p class="changelog__lead" data-testid="changelog-lead">
-          Sumi Notes の版ごとの変更を、新しい順に載せています。日付は、Microsoft Store
+          Sumi Notes のバージョンごとの変更を、新しい順に載せています。日付は、Microsoft Store
           で公開した日です。
         </p>
 
-        <nav class="changelog__index" aria-label="版の一覧" data-testid="changelog-index">
+        <nav class="changelog__index" aria-label="バージョンの一覧" data-testid="changelog-index">
           <ul class="changelog__index-list">
+            <li>
+              <a class="changelog__index-link" href="#v1.1.0" data-testid="changelog-index-1.1.0"
+                >1.1.0</a
+              >
+            </li>
             <li>
               <a class="changelog__index-link" href="#v1.0.3" data-testid="changelog-index-1.0.3"
                 >1.0.3</a
@@ -137,6 +142,20 @@
             </li>
           </ul>
         </nav>
+
+        <section class="changelog__release" data-testid="release-1.1.0" data-version="1.1.0">
+          <h2 class="changelog__version" id="v1.1.0" data-testid="release-version-1.1.0">1.1.0</h2>
+          <p class="changelog__date" data-testid="release-date-1.1.0">
+            公開日:
+            <time datetime="2026-11-12">2026年11月12日</time>
+          </p>
+          <ul class="changelog__changes" data-testid="release-changes-1.1.0">
+            <li>
+              英語の画面に対応しました。初めて起動したときは Windows
+              の表示言語に合わせて日本語か英語で表示され、設定画面の「言語」で切り替えられます。
+            </li>
+          </ul>
+        </section>
 
         <section class="changelog__release" data-testid="release-1.0.3" data-version="1.0.3">
           <h2 class="changelog__version" id="v1.0.3" data-testid="release-version-1.0.3">1.0.3</h2>
@@ -159,7 +178,7 @@
             公開日: <time datetime="2026-11-02">2026年11月2日</time>
           </p>
           <ul class="changelog__changes" data-testid="release-changes-1.0.1">
-            <li>最初の版として、Microsoft Store で公開しました。</li>
+            <li>最初のバージョンとして、Microsoft Store で公開しました。</li>
           </ul>
         </section>
       </article>
