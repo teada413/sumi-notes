@@ -4,71 +4,97 @@
  * site.css はここの変数だけを参照し、値を直接書かない（1px の罫線など構造上の値を除く）。
  *
  * - ライト: docs/design-tokens.md の値
- * - ダーク: docs/design-references/dark-palette.md の「ライトとダークの対応」
+ * - ダーク: Sprint 53 から、ライトと同じ考え方（白と黒が基本）を黒の地に当てたもの（下の @media）。
  *   OS の配色（prefers-color-scheme）で切り替える。
  *
  * サイトだけの読み替え（2026-11-02 のユーザーの決定。Sprint 44。アプリの色と design-tokens.md は変えない）:
- * - ボタンとリンクの青: design-tokens.md の primary（アプリと同じ青）から、Apple に近い明るい青 #0071e3 前後へ
  * - ヒーローの藍の帯（design-tokens.md の secondary）をやめ、ヒーローの地をページのほかの部分と同じ地にする
- * 青は designer がコントラスト比を測って決めた値（Sprint 44 designer の報告の「トークン外の判断」）:
- *   ライト: ボタン #0071e3（白い文字 4.70:1）・押したとき #0062c4（5.93:1）・リンク #0066cc（canvas-soft 5.11:1・白 5.57:1）
- *   ダーク: ボタン #0071e3（白い文字 4.70:1）・押したとき #0062c4・リンク #2997ff（#191817 5.88:1・#232220 5.27:1）
- * 3つの青は同じ色相（約 210°）の明るさ違いで、2つ目のアクセント色ではない。
+ *
+ * Sprint 53 の読み替え（2026-11-11 のユーザーの決定「アップルのサイトのようにしてほしい。…基本は白と黒と
+ * したい。広い範囲で塗りが必要なら淡い色を使う」。参考: docs/design-references/site-apple-reference.md）:
+ * - 地は白（canvas #ffffff）・淡い色（canvas-parchment #f5f5f7）・黒に近い面（surface-tile-1 #272729）の3つ。
+ *   区切りごとに site.css の .tone-white / .tone-parchment / .tone-dark で交互にする（designer の報告の判断）。
+ *   design-tokens.md の暖かい canvas-soft (#f6f5f4) の地は、Apple の冷たい白と淡い灰に置き換えた。
+ * - 文字は黒に近い ink #1d1d1f（純黒 #000000 から）。
+ * - 青は操作の要素（ボタン・リンク・フォーカス）だけ。広い面は塗らない。
+ *   ライト: ボタン #0066cc（白い文字 5.57:1）・ホバー #0071e3（4.70:1）・リンク #0066cc（白 5.57:1・#f5f5f7 5.11:1）
+ *   ダーク・黒い面: ボタンは同じ・リンク #2997ff（#000000 6.96:1・#1d1d1f 5.58:1・#272729 4.94:1）
+ *   Sprint 44 のボタン #0071e3・押したとき #0062c4 から、資料の Action Blue #0066cc に寄せた。
  */
 
 :root {
   color-scheme: light;
 
-  /* Palette (docs/design-tokens.md "colors"; the blues are the site's own, see the top) */
-  --color-primary: #0071e3; /* the button's fill (white label 4.7:1) */
-  --color-primary-active: #0062c4; /* the button while pressed / hovered */
-  --color-primary-text: #0066cc; /* links on the light grounds (5.1:1 on canvas-soft) */
+  /* Palette (site-apple-reference.md "colors"; Sprint 53) */
+  --color-primary: #0066cc; /* Action Blue: the button's fill (white label 5.57:1) and links */
+  --color-primary-active: #0071e3; /* Focus Blue: the button while hovered (white label 4.70:1) */
+  --color-primary-text: #0066cc; /* links on white (5.57:1) and parchment (5.11:1) */
+  --color-primary-focus: #0071e3; /* the keyboard focus ring (reference: 2px solid primary-focus) */
+  --color-primary-on-dark: #2997ff; /* Sky Link Blue: links on the dark tiles */
   --color-on-primary: #ffffff;
   --color-canvas: #ffffff;
-  --color-canvas-soft: #f6f5f4;
+  --color-canvas-soft: #f5f5f7; /* canvas-parchment (was design-tokens canvas-soft #f6f5f4) */
   --color-surface: #ffffff;
-  --color-ink: #000000;
-  --color-ink-secondary: #31302e;
-  --color-ink-muted: #615d59;
+  --color-ink: #1d1d1f; /* near-black ink (was #000000) */
+  --color-ink-secondary: #333333; /* ink-muted-80 (was #31302e) */
+  --color-ink-muted: #6e6e73; /* designer: apple.com's muted grey (5.07:1 on white, 4.66:1 on #f5f5f7) */
   --color-ink-faint: #a39e98;
-  --color-hairline: #e6e6e6;
+  --color-hairline: #e0e0e0; /* reference hairline (was #e6e6e6) */
   --color-accent-sky: #62aef0;
+
+  /* The near-black tile (product-tile-dark) and the text on it, in both palettes */
+  --color-tile: #272729; /* surface-tile-1 */
+  --color-tile-card: #1d1d1f; /* cards / keys on the tile (reference ink used as a surface) */
+  --color-on-tile: #ffffff; /* body-on-dark */
+  --color-on-tile-secondary: #cccccc; /* body-muted (9.28:1 on #272729) */
+  --color-on-tile-muted: #a1a1a6; /* designer: apple.com's muted grey on dark (5.80:1 on #272729) */
+  --color-on-tile-hairline: rgba(255, 255, 255, 0.16); /* designer: the reference's 8% hairline, doubled on dark */
 
   /* Roles (site.css uses these) */
   /*
-   * The page sits on the warm canvas-soft (design-tokens Do / Don't). primary (#0071e3)
-   * is about 4.3:1 on canvas-soft, so text links on the page use primary-text (#0066cc);
-   * the primary button keeps primary (its white label is about 4.7:1 on it).
+   * White (canvas) is the page; parchment (canvas-soft) is the alternate tile, the footer and the
+   * cards that sit on white; the dark tile carries the sections whose picture is the app's dark
+   * palette and the closing call.
    */
-  --color-bg-page: var(--color-canvas-soft);
+  --color-bg-page: var(--color-canvas);
   --color-bg-hero: var(--color-bg-page); /* no band: the hero is on the page's own ground */
   --color-bg-header: var(--color-canvas);
   --color-bg-card: var(--color-surface);
   --color-bg-well: var(--color-canvas-soft);
   --color-bg-footer: var(--color-canvas-soft);
-  --color-bg-kbd: var(--color-canvas-soft);
+  --color-bg-kbd: var(--color-canvas);
+  /*
+   * Sprint 53: the three grounds of the sections (white, parchment, the dark tile; site.css
+   * .tone-*) and the header's menu on narrow widths.
+   */
+  --color-bg-section: var(--color-bg-page);
+  --color-bg-section-alt: var(--color-canvas-soft);
+  --color-bg-section-dark: var(--color-tile);
+  --color-bg-panel: var(--color-canvas-soft); /* the table / list panels on a white tile */
+  --color-bg-panel-on-alt: var(--color-canvas); /* the same panels on a parchment tile */
+  --color-bg-nav-menu: var(--color-bg-header);
+  --color-lang-switch-border: var(--color-ink-muted); /* designer (Sprint 54): the language switch's outline (#6e6e73, 5.07:1 on white) */
   --color-text: var(--color-ink);
   --color-text-secondary: var(--color-ink-secondary);
   --color-text-muted: var(--color-ink-muted);
   --color-link: var(--color-primary-text);
+  --color-link-on-dark: var(--color-primary-on-dark);
   --color-footer-link: var(--color-ink-secondary);
   --color-border: var(--color-hairline);
-  --color-focus-ring: var(--color-primary-text);
+  --color-focus-ring: var(--color-primary-focus);
+  --color-focus-ring-on-dark: var(--color-primary-on-dark);
   --color-button-primary-bg: var(--color-primary);
   --color-button-primary-bg-active: var(--color-primary-active);
   --color-button-primary-text: var(--color-on-primary);
-  --color-button-secondary-bg: var(--color-surface);
+  /* The second CTA: the reference's ghost pill (transparent, Action Blue text and 1px ring) */
+  --color-button-secondary-bg: transparent;
   --color-button-secondary-bg-hover: var(--color-canvas-soft);
-  --color-button-secondary-text: var(--color-ink);
-  --color-button-secondary-border: var(--color-hairline);
+  --color-button-secondary-text: var(--color-primary-text);
+  --color-button-secondary-border: var(--color-primary-text);
 
   /* The hero (no band since Sprint 44): dark text on the page's ground; the picture's edge */
   --color-hero-text: var(--color-text);
-  /*
-   * The picture's edge on the light ground: hairline (#e6e6e6) melts into canvas-soft, and the
-   * app's own sidebar is canvas-soft too, so the edge is ink at 10% (= hairline's black-at-10%
-   * blend, laid over the ground instead of white). The layered shadow below does the rest.
-   */
+  /* The picture's edge on the white ground: ink at 10% (the reference's soft hairline is 8%) */
   --color-hero-shot-border: rgba(0, 0, 0, 0.1);
 
   /* The brand mark (T1 "墨流しの雫"; the same in both palettes, like the app icon) */
@@ -100,6 +126,37 @@
   --font-size-button: 16px;
   --font-size-caption: 14px;
   --font-size-eyebrow: 12px;
+
+  /*
+   * Sprint 53: the reference's SF Pro ladder read onto the bundled Inter + Noto Sans JP
+   * (designer's report). Weight 600 for headings (not 700), 400 for body and buttons (500 is
+   * absent from the reference's ladder). Tracking: the reference's value nudged by -0.01em for
+   * Inter at display sizes; none on Japanese body text. Line heights opened up for Japanese.
+   */
+  --font-size-site-display: 56px; /* hero-display (h1) */
+  --font-size-site-display-md: 40px; /* h1 <= 1068px (display-lg) */
+  --font-size-site-display-sm: 34px; /* h1 <= 640px (display-md) */
+  --font-size-site-h2: 40px; /* display-lg (section headings) */
+  --font-size-site-h2-sm: 28px; /* h2 <= 640px (lead size) */
+  --font-size-site-h3: 21px; /* tagline (sub-headings) */
+  --font-size-site-h3-sm: 17px; /* h3 <= 640px and the FAQ's questions (body-strong) */
+  --font-size-site-lead: 21px; /* the hero's lead (tagline size at 400) */
+  --font-size-site-body: 17px; /* body */
+  --font-size-site-nav: 14px; /* button-utility (the header's links) */
+  --font-size-site-menu: 21px; /* the links inside the narrow-width menu (tagline) */
+  --font-size-download-desc-narrow: var(--font-size-body-md); /* 16px: the download table's values at <= 640px (the 対応 OS phrase fits 375px) */
+  --line-height-site-display: 1.14;
+  --line-height-site-h2: 1.2;
+  --line-height-site-h3: 1.38;
+  --line-height-site-body: 1.6; /* body 1.47 opened for Japanese (prose keeps --line-height-prose 1.8) */
+  --line-height-site-nav: 1.29;
+  --letter-spacing-site-display: -0.84px; /* -0.28px - 0.01em at 56px */
+  --letter-spacing-site-display-md: -0.4px; /* 0 - 0.01em at 40px */
+  --letter-spacing-site-display-sm: -0.34px; /* 34px: -0.01em */
+  --letter-spacing-site-h2: -0.4px; /* display-lg 0 - 0.01em at 40px */
+  --letter-spacing-site-h2-sm: -0.28px; /* 28px: -0.01em */
+  --letter-spacing-site-h3: 0.231px; /* tagline */
+  --letter-spacing-site-nav: -0.224px; /* button-utility */
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -176,6 +233,20 @@
   --focus-ring-width: 2px;
   --focus-ring-offset: 2px;
   --touch-target-min: 44px;
+  --lang-switch-inset: var(--space-xs); /* designer (Sprint 54): the language switch's outline sits 8px inside its 44px hit area */
+  --layout-figure-max-width: 880px; /* the drawn figure of the notes folder (Sprint 53) */
+  --feature-item-min-width: 280px; /* the sub-headings of a section run in columns of at least this */
+
+  /* The header's menu on narrow widths (Sprint 53; js/nav.js, site.css). Limit: 300ms */
+  --z-header: 10;
+  --nav-menu-duration: 200ms; /* designer (Sprint 53): kept the generator's 200ms (limit 300ms) */
+  --nav-menu-easing: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --nav-menu-distance: 8px;
+  --nav-toggle-bar-width: 18px; /* designer (Sprint 53): the bars inside the 44px button */
+  --nav-toggle-bar-height: 2px; /* designer: 2px so the bars keep 3:1 as a non-text control */
+  --nav-toggle-bar-gap: 4px; /* designer: space.xxs; the three bars make a 14px-tall mark */
+  --shadow-nav-menu: var(--shadow-level-2); /* design-tokens Level 2 (popovers) */
+  /* The menu replaces the links at max-width 833px (site.css; the reference collapses at 834px and below) */
 
   /* The hero picture's tilt (main.js reads these; designer's values, Sprint 40) */
   --hero-perspective: 1600px;
@@ -202,33 +273,41 @@
   :root {
     color-scheme: dark;
 
-    /* docs/design-references/dark-palette.md; the blues are the site's own (see the top) */
-    --color-primary: #0071e3; /* the button keeps the blue fill with a white label (4.7:1) */
-    --color-primary-active: #0062c4;
-    --color-primary-text: #2997ff; /* links on the dark grounds (5.88:1 on #191817, 5.27:1 on #232220) */
+    /*
+     * Sprint 53: the same idea on black (the reference's surface-black / ink / surface-tile-1).
+     * White -> black #000000, parchment -> #1d1d1f, the dark tile stays #272729 (a step lighter
+     * than both). Text near-white; links Sky Link Blue; the button keeps Action Blue.
+     */
+    --color-primary: #0066cc; /* the button: white label 5.57:1 */
+    --color-primary-active: #0071e3; /* hovered: 4.70:1 */
+    --color-primary-text: #2997ff; /* links: 6.96:1 on #000000, 5.58:1 on #1d1d1f */
+    --color-primary-focus: #2997ff; /* the focus ring on black (#0071e3 is only 4.1:1 there) */
     --color-on-primary: #ffffff;
-    --color-canvas: #191817;
-    --color-canvas-soft: #232220;
-    --color-surface: #232220;
-    --color-ink: #ffffff;
-    --color-ink-secondary: #ffffff;
-    --color-ink-muted: rgba(255, 255, 255, 0.6);
-    --color-hairline: rgba(255, 255, 255, 0.12);
+    --color-canvas: #000000; /* surface-black */
+    --color-canvas-soft: #1d1d1f; /* parchment's place on black */
+    --color-surface: #1d1d1f;
+    --color-ink: #f5f5f7; /* near-white (canvas-parchment as ink) */
+    --color-ink-secondary: #cccccc; /* body-muted (11.0:1 on #1d1d1f) */
+    --color-ink-muted: #a1a1a6; /* 6.54:1 on #1d1d1f */
+    --color-hairline: rgba(255, 255, 255, 0.16);
 
-    /* The page on canvas (#191817), cards and wells one step up (#232220) */
     --color-bg-page: var(--color-canvas);
     --color-bg-header: var(--color-canvas);
     --color-bg-card: var(--color-surface);
     --color-bg-well: var(--color-canvas);
-    --color-bg-footer: var(--color-canvas);
+    --color-bg-footer: var(--color-canvas-soft);
     --color-bg-kbd: var(--color-canvas);
+    --color-bg-panel: var(--color-canvas-soft); /* #1d1d1f on black */
+    --color-bg-panel-on-alt: var(--color-canvas); /* black on #1d1d1f */
+    /* The menu over the black page: one step up, so it reads apart from the content under it */
+    --color-bg-nav-menu: var(--color-canvas-soft);
     --color-link: var(--color-primary-text);
     --color-button-secondary-bg: transparent;
-    --color-button-secondary-bg-hover: var(--color-canvas-soft); /* #232220 */
-    --color-button-secondary-text: #ffffff;
-    --color-button-secondary-border: #ffffff;
+    --color-button-secondary-bg-hover: var(--color-canvas-soft);
+    --color-button-secondary-text: var(--color-primary-text);
+    --color-button-secondary-border: var(--color-primary-text);
 
-    /* The hero stays on the dark ground, without a band; the light picture shows its own edge */
+    /* The hero stays on the black ground, without a band; the light picture shows its own edge */
     --color-hero-shot-border: var(--color-hairline);
   }
 }

@@ -13,13 +13,16 @@
       name="description"
       content="書いたメモの居場所が、いつも分かる。Sumi Notes は、書いた内容を自動で保存し、自分で選んだフォルダに Markdown 形式のファイル（.md）として残す、Windows のノートアプリです。"
     />
+    <link rel="alternate" hreflang="ja" href="index.html" />
+    <link rel="alternate" hreflang="en" href="en/index.html" />
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/tokens.css" />
     <link rel="stylesheet" href="css/site.css" />
     <script src="js/config.js" defer></script>
-    <!-- main.js は defer にしない: 表示の前に <html> に .reveal-ready を付けるため。ページの処理は DOMContentLoaded（config.js の後）で始める -->
+    <!-- main.js と nav.js は defer にしない: 表示の前に <html> に .reveal-ready・.nav-ready を付けるため。ページの処理は DOMContentLoaded（config.js の後）で始める -->
     <script src="js/main.js"></script>
+    <script src="js/nav.js"></script>
   </head>
   <body>
     <header class="site-header" data-testid="site-header">
@@ -57,29 +60,52 @@
           </svg>
           <span class="brand__name">Sumi Notes</span>
         </a>
-        <nav class="site-nav" aria-label="ページ内の案内">
-          <ul class="site-nav__list">
-            <li><a class="site-nav__link" href="#features" data-testid="nav-features">特徴</a></li>
+        <nav class="site-nav" aria-label="サイトの案内" data-site-nav data-testid="site-nav">
+          <button
+            class="site-nav__toggle"
+            type="button"
+            aria-label="メニュー"
+            aria-expanded="false"
+            aria-controls="site-nav-list"
+            data-nav-toggle
+            data-testid="nav-toggle"
+          >
+            <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+            <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+            <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+          </button>
+          <ul class="site-nav__list" id="site-nav-list" data-testid="nav-list">
+            <li><a class="site-nav__link" href="#features" data-testid="nav-features">機能</a></li>
+            <li><a class="site-nav__link" href="#faq" data-testid="nav-faq">よくある質問</a></li>
             <li>
               <a class="site-nav__link" href="#download" data-testid="nav-download">入手の方法</a>
-            </li>
-            <li>
-              <a class="site-nav__link" href="privacy.html" data-testid="nav-privacy"
-                >プライバシーポリシー</a
-              >
             </li>
             <li>
               <a class="site-nav__link" href="changelog.html" data-testid="nav-changelog"
                 >更新履歴</a
               >
             </li>
+            <li>
+              <a class="site-nav__link" href="privacy.html" data-testid="nav-privacy"
+                >プライバシーポリシー</a
+              >
+            </li>
           </ul>
+          <a
+            class="site-nav__lang"
+            href="en/index.html"
+            hreflang="en"
+            lang="en"
+            data-testid="lang-switch"
+            >English</a
+          >
         </nav>
       </div>
     </header>
 
     <main id="main">
-      <section class="hero" aria-labelledby="hero-title" data-testid="hero">
+      <!-- 1. メイン -->
+      <section id="hero" class="hero" aria-labelledby="hero-title" data-testid="hero">
         <div class="hero__inner">
           <div class="hero__text">
             <!-- prettier-ignore -->
@@ -100,7 +126,7 @@
                 >Microsoft Store から入手</a
               >
               <a class="button button--secondary" href="#features" data-testid="features-button"
-                >特徴を見る</a
+                >機能を見る</a
               >
             </div>
           </div>
@@ -113,6 +139,8 @@
                 height="800"
                 alt="Sumi Notes の画面。左から、ノートブック・ステータス・タグの欄、ノートの一覧、旅行の計画のノートが並んでいます。ノートは Markdown の編集画面とプレビューを左右に並べて表示し、プレビューには表・写真・チェックボックスが表示されています。"
                 data-testid="hero-image"
+                data-picture="hero"
+                data-scheme="light"
               />
             </div>
           </div>
@@ -130,148 +158,812 @@
         </div>
       </section>
 
+      <!-- 2. 手元のファイル（ヘッダーの「機能」の行き先。id は前の「特徴」の #features を引き継ぐ） -->
       <section
         id="features"
-        class="section features"
-        aria-labelledby="features-title"
-        data-testid="features"
+        class="section feature-section tone-parchment"
+        
+        data-section="files"
+        data-testid="section-files"
       >
         <div class="section__inner">
-          <h2 id="features-title" class="section__title" tabindex="-1" data-reveal="features-title">
-            特徴
+          <h2 id="features-title" class="section__title" tabindex="-1" data-reveal="section-title">
+            書いたノートは、Markdown 形式のファイルとして手元に残る
           </h2>
-          <ul class="features__grid">
-            <li
-              class="feature-card feature-card--keys"
-              data-testid="feature-card"
-              data-reveal="feature-card"
-            >
-              <h3 class="feature-card__title">ノートは Markdown 形式のファイル（.md）</h3>
-              <p class="feature-card__text">
-                ノートは、自分で選んだフォルダに Markdown
-                形式のファイル（.md）として保存されます。ほかのエディタでも開くことができ、そこで加えた変更も、そのまま画面に反映されます。
-              </p>
-              <img
-                class="feature-card__figure"
-                src="images/feature-files.png"
-                width="880"
-                height="640"
-                loading="lazy"
-                alt="ノートのフォルダの中を表した図。左に「Inbox」「使い方」のフォルダと、「日報」「議事録」「旅行の計画」などのノートが Markdown 形式のファイル（.md）として並び、右に開いた「旅行の計画」のファイルの先頭の、題名・ステータス・タグを書いた行と本文の数行が表示されています。"
-                data-testid="feature-files-image"
-              />
-            </li>
-            <li
-              class="feature-card feature-card--wide"
-              data-testid="feature-card"
-              data-reveal="feature-card"
-            >
-              <h3 class="feature-card__title">日本語も1文字から検索できる</h3>
-              <p class="feature-card__text">
-                全文検索は1文字からの部分一致です。全角と半角、大文字と小文字を区別せずに検索し、見つかった箇所を一覧の中で強調して表示します。
-              </p>
-              <p class="feature-card__keys">
-                <kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
-                ><kbd class="kbd">Shift</kbd><span class="kbd-plus">+</span><kbd class="kbd">F</kbd>
-                <span class="feature-card__key-label">ノートを検索</span>
-              </p>
-              <img
-                class="feature-card__image"
-                src="images/feature-search.png"
-                width="1040"
-                height="650"
-                loading="lazy"
-                alt="「索引」で検索した画面。ノートの一覧の題名と本文の抜粋で、「索引」の文字が強調されています。"
-                data-testid="feature-image"
-              />
-            </li>
-            <li
-              class="feature-card feature-card--wide feature-card--flip"
-              data-testid="feature-card"
-              data-reveal="feature-card"
-            >
-              <h3 class="feature-card__title">ステータスとタグで整理できる</h3>
-              <p class="feature-card__text">
-                ノートブック（入れ子にできます）、ステータス（進行中・保留・完了・中止）、色を付けられるタグでノートを整理します。よく使うノートは、一覧の上にピン留めできます。
-              </p>
-              <img
-                class="feature-card__image"
-                src="images/feature-status-tags.png"
-                width="1040"
-                height="650"
-                loading="lazy"
-                alt="ステータス「進行中」で絞り込んだノートの一覧と、不具合の調査のノート。一覧の各ノートに、色の付いたタグが並んでいます。"
-                data-testid="feature-image"
-              />
-            </li>
-            <li
-              class="feature-card feature-card--wide"
-              data-testid="feature-card"
-              data-reveal="feature-card"
-            >
-              <h3 class="feature-card__title">すぐに使えるテンプレートが 29 個</h3>
-              <p class="feature-card__text">
-                日報・議事録・旅行の計画・不具合の修正など、29
-                個のテンプレートを用意しています。自分で作成したテンプレートも使用できます。
-              </p>
-              <p class="feature-card__keys">
-                <kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span><kbd class="kbd">T</kbd>
-                <span class="feature-card__key-label">テンプレートから作成</span>
-              </p>
-              <img
-                class="feature-card__image"
-                src="images/feature-templates.png"
-                width="1040"
-                height="650"
-                loading="lazy"
-                alt="テンプレートを選ぶ画面。左にテンプレートの名前の一覧、右に選んだ「日報」の内容の見本が表示されています。"
-                data-testid="feature-image"
-              />
-            </li>
-            <li
-              class="feature-card feature-card--keys"
-              data-testid="feature-card"
-              data-reveal="feature-card"
-            >
-              <h3 class="feature-card__title">ノート同士をリンクでつなげる</h3>
-              <p class="feature-card__text">
-                [[
-                と入力すると、ほかのノートの題名が候補として表示され、リンクを挿入できます。リンク先のノートでは、どのノートからリンクされているか（バックリンク）を確認できます。
-              </p>
-              <p class="feature-card__keys">
-                <kbd class="kbd">[</kbd><kbd class="kbd">[</kbd>
-                <span class="feature-card__key-label">ノートへのリンクを挿入</span>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image feature-section__image--figure"
+              src="images/feature-files.png"
+              width="880"
+              height="640"
+              loading="lazy"
+              alt="ノートのフォルダの中を表した図。左に「Inbox」「使い方」のフォルダと、「日報」「議事録」「旅行の計画」などのノートが Markdown 形式のファイル（.md）として並び、右に開いた「旅行の計画」のファイルの先頭の、題名・ステータス・タグを書いた行と本文の数行が表示されています。"
+              data-testid="feature-image"
+              data-picture="files"
+              data-scheme="light"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">自分で選んだフォルダに、1ノート1ファイルで保存</h3>
+              <p class="feature-item__text">
+                ノートは1つずつ、Markdown
+                形式のファイル（.md）として、自分で選んだ「ノートのフォルダ」に保存されます。ノートブックは、そのフォルダの中のフォルダです。
               </p>
             </li>
-            <li
-              class="feature-card feature-card--wide feature-card--flip"
-              data-testid="feature-card"
-              data-reveal="feature-card"
-            >
-              <h3 class="feature-card__title">改訂履歴から前の版に戻せる</h3>
-              <p class="feature-card__text">
-                入力が止まるたびに、本文の版が改訂履歴に残ります。前の版との違いを確認して、元に戻すことができます。削除したノートはゴミ箱に移り、あとから復元できます。
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">ほかのアプリでも開ける</h3>
+              <p class="feature-item__text">
+                メモ帳やほかのエディタでも、そのまま開けます。ほかのエディタで加えた変更も、そのまま
+                Sumi Notes の画面に反映されます。
               </p>
-              <img
-                class="feature-card__image"
-                src="images/feature-history.png"
-                width="1040"
-                height="720"
-                loading="lazy"
-                alt="議事録のノートの改訂履歴の画面。左に版の一覧、右に選んだ版の本文が表示されています。"
-                data-testid="feature-image"
-              />
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">アプリを削除しても、ノートは残る</h3>
+              <p class="feature-item__text">
+                アプリをアンインストールしても、ノートのフォルダとその中のノートは削除されません。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">アカウントの登録は不要</h3>
+              <p class="feature-item__text">
+                アカウントの登録やサインインをしなくても、すぐに使い始められます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">インターネットに接続しなくても使える</h3>
+              <p class="feature-item__text">
+                ノートを書く・整理する・探すことは、インターネットに接続していない環境でもできます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">ノートの内容を外部に送らない</h3>
+              <p class="feature-item__text">
+                利用者の情報やノートの内容を、外部に送信しません。利用状況の記録も広告もありません。詳しくは<a
+                  href="privacy.html"
+                  data-testid="files-privacy-link"
+                  >プライバシーポリシー</a
+                >をご覧ください。
+              </p>
             </li>
           </ul>
         </div>
       </section>
 
+      <!-- 3. 書く -->
       <section
-        id="download"
-        class="section download"
-        aria-labelledby="download-title"
-        data-testid="download"
+        id="write"
+        class="section feature-section tone-dark"
+        
+        data-section="write"
+        data-testid="section-write"
       >
+        <div class="section__inner">
+          <h2 id="write-title" class="section__title" data-reveal="section-title">
+            書くことに、集中できる
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image"
+              src="images/feature-write.png"
+              width="1040"
+              height="650"
+              loading="lazy"
+              alt="ダークの配色の Sumi Notes の画面。「検索の索引の設計メモ」のノートを、左に編集画面、右にプレビューを並べて表示しています。編集画面の空の行で「/」を入力したところで、見出しや太字などの書き方の候補が一覧で表示されています。"
+              data-testid="feature-image"
+              data-picture="write"
+              data-scheme="dark"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">等幅のエディタと記法の色分け</h3>
+              <p class="feature-item__text">
+                エディタは等幅のフォントで、見出し・リスト・コードなどの Markdown
+                の記法を色分けして表示します。リストや引用は、改行すると次の行に続きます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">編集画面とプレビューを左右に並べる</h3>
+              <p class="feature-item__text">
+                書きながら、仕上がりを右のプレビューで確認できます。左右のスクロールは連動します。編集のみ・プレビューのみの表示にも切り替えられます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">「/」で書き方を選んで入れる</h3>
+              <p class="feature-item__text">
+                空の行で「/」を入力すると、見出し・表・タスクリスト・コードブロックなど、18
+                個の書き方の候補が表示されます。選ぶと、その記法が入ります。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">文字を選ぶと出るツールバー</h3>
+              <p class="feature-item__text">
+                文字を選ぶと、見出し・太字・リンク・リストなどの整形のボタンが表示されます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">集中モード</h3>
+              <p class="feature-item__text">
+                サイドバーとノートの一覧を隠して、エディタだけを広く表示します。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">画像は貼り付けかドロップで添付</h3>
+              <p class="feature-item__text">
+                画像を貼り付けるか、エディタにドロップすると、ノートのフォルダの中に保存され、ノートに挿入されます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">コードブロックの色分けとコピー</h3>
+              <p class="feature-item__text">
+                コードブロックは言語ごとに色分けされ、右上のボタンでコードをコピーできます。
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 4. 整理する -->
+      <section
+        id="organize"
+        class="section feature-section tone-white"
+        
+        data-section="organize"
+        data-testid="section-organize"
+      >
+        <div class="section__inner">
+          <h2 id="organize-title" class="section__title" data-reveal="section-title">
+            ノートが増えても、迷わない
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image"
+              src="images/feature-organize.png"
+              width="1040"
+              height="650"
+              loading="lazy"
+              alt="ライトの配色の Sumi Notes の画面。ノートの一覧の「検索の索引の設計メモ」を、サイドバーのステータス「進行中」へドラッグしているところです。ノートのアイコンと題名を書いた小さなカードがポインタに付いて動き、落とす先の「進行中」に印が付いています。"
+              data-testid="feature-image"
+              data-picture="organize"
+              data-scheme="light"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">入れ子にできるノートブック</h3>
+              <p class="feature-item__text">
+                ノートブックの中にノートブックを作れます。サイドバーでドラッグすると、並べ替えたり、ほかのノートブックの中に入れたりできます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">ノートブックごとのページ</h3>
+              <p class="feature-item__text">
+                ノートブックを開くと、サイドバーがそのノートブックだけのページになり、中のノートブック・ステータス・タグとノートの数が表示されます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">ステータス（進行中・保留・完了・中止）</h3>
+              <p class="feature-item__text">
+                ノートに4つのステータスを付けて、ステータスで絞り込めます。完了と中止にしたノートは、一覧から自動で隠れます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">色を付けられるタグ</h3>
+              <p class="feature-item__text">
+                1つのノートに複数のタグを付けられます。タグには色を付けられ、タグでノートを絞り込めます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">よく使うノートはピン留め</h3>
+              <p class="feature-item__text">ピン留めしたノートは、一覧の先頭に表示されます。</p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">
+                ドラッグでノートブックへ移す・ステータスやタグを付ける
+              </h3>
+              <p class="feature-item__text">
+                ノートの一覧の行をサイドバーへドラッグすると、ノートブックへ移したり、ステータスやタグを付けたり、ゴミ箱へ移したりできます。
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5. 探す・つなぐ -->
+      <section
+        id="search"
+        class="section feature-section tone-dark"
+        
+        data-section="search"
+        data-testid="section-search"
+      >
+        <div class="section__inner">
+          <h2 id="search-title" class="section__title" data-reveal="section-title">
+            書いたものに、すぐたどり着ける
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image"
+              src="images/feature-search.png"
+              width="1040"
+              height="650"
+              loading="lazy"
+              alt="ダークの配色の Sumi Notes の画面。「索引」で検索した結果で、ノートの一覧の題名と本文の抜粋の「索引」の文字が強調され、右に「検索の索引の設計メモ」のプレビューが表示されています。"
+              data-testid="feature-image"
+              data-picture="search"
+              data-scheme="dark"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">日本語も1文字から検索</h3>
+              <p class="feature-item__text">
+                全文検索は1文字からの部分一致です。全角と半角、大文字と小文字を区別せずに探し、見つかった語を一覧の中で強調して表示します。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">一致度の高い順に並べる</h3>
+              <p class="feature-item__text">
+                検索の結果は、一致度の高い順に並べられます。サイドバーで選んでいるノートブックやタグの中だけを探すこともできます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">ノートの中の検索と置換</h3>
+              <p class="feature-item__text">
+                開いているノートの中で、語を検索して置換できます。正規表現にも対応しています。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">「[[」でノート同士をリンク</h3>
+              <p class="feature-item__text">
+                「[[」と入力すると、ほかのノートの題名が候補として表示され、リンクを挿入できます。リンク先のノートの名前を変えても、ほかのノートブックへ移しても、リンクは切れません。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">リンクしているノートの一覧（バックリンク）</h3>
+              <p class="feature-item__text">
+                リンク先のノートで、どのノートからリンクされているかを一覧で確認できます。
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 6. 守る -->
+      <section
+        id="protect"
+        class="section feature-section tone-parchment"
+        
+        data-section="protect"
+        data-testid="section-protect"
+      >
+        <div class="section__inner">
+          <h2 id="protect-title" class="section__title" data-reveal="section-title">
+            消しても、書き換えても、元に戻せる
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image"
+              src="images/feature-history.png"
+              width="1040"
+              height="720"
+              loading="lazy"
+              alt="ライトの配色の、議事録のノートの改訂履歴の画面。左に版の一覧、右に選んだ版の本文が表示されています。"
+              data-testid="feature-image"
+              data-picture="protect"
+              data-scheme="light"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">入力した内容は自動で保存</h3>
+              <p class="feature-item__text">
+                保存の操作は不要です。入力した内容は、自動でファイルに保存されます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">改訂履歴で前の版と比べて戻す</h3>
+              <p class="feature-item__text">
+                入力が止まるたびに、本文の版が改訂履歴に残ります。前の版との違いを確認して、元に戻せます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">削除したノートはゴミ箱から復元</h3>
+              <p class="feature-item__text">
+                削除したノートはゴミ箱に移ります。戻す先のノートブックを選んで、あとから復元できます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">次に起動したときは、前回の画面から再開</h3>
+              <p class="feature-item__text">
+                アプリを起動し直すと、開いていたノート、カーソルとスクロールの位置、検索の語が元に戻ります。
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 7. すぐ始められる -->
+      <section
+        id="start"
+        class="section feature-section tone-dark"
+        
+        data-section="start"
+        data-testid="section-start"
+      >
+        <div class="section__inner">
+          <h2 id="start-title" class="section__title" data-reveal="section-title">
+            今日から、すぐに書き始められる
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image"
+              src="images/feature-templates.png"
+              width="1040"
+              height="650"
+              loading="lazy"
+              alt="ダークの配色の、テンプレートを選ぶ画面。左に分類ごとのテンプレートの名前の一覧、右に選んだ「日報」の内容の見本が表示されています。"
+              data-testid="feature-image"
+              data-picture="start"
+              data-scheme="dark"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">テンプレートが 29 個</h3>
+              <p class="feature-item__text">
+                日報・議事録・旅行の計画・不具合の修正など、29
+                個のテンプレートを用意しています。Ctrl+T で選んで、ノートを作れます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">自分で作ったテンプレートも使える</h3>
+              <p class="feature-item__text">
+                「Templates」のフォルダにノートを置くと、自分のテンプレートとして使えます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">使い方を書いたノートが5つ</h3>
+              <p class="feature-item__text">
+                ノートが1つも無いフォルダで始めると、使い方を書いたノートが5つ入ります。Markdown
+                の書き方や、使い方の例を確認できます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">今ある Markdown 形式のファイルのフォルダも使える</h3>
+              <p class="feature-item__text">
+                今まで書いてきた Markdown
+                形式のファイル（.md）のフォルダを、そのままノートのフォルダとして使えます。
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 8. キーボード（写真なし。表だけ） -->
+      <section
+        id="keyboard"
+        class="section feature-section tone-white"
+        
+        data-section="keyboard"
+        data-testid="section-keyboard"
+      >
+        <div class="section__inner">
+          <h2 id="keyboard-title" class="section__title" data-reveal="section-title">
+            キーボードだけで、手早く操作できる
+          </h2>
+          <ul class="feature-list feature-list--single">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">よく使うキー</h3>
+              <div class="keys-table__scroll">
+                <table class="keys-table" data-testid="keyboard-table">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="keys-table__head">キー</th>
+                      <th scope="col" class="keys-table__head">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-testid="keyboard-row" data-shortcut-id="new-note">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">N</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">新しいノートを作る</td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="new-from-template">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">T</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">テンプレートからノートを作る</td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="note-search">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">Shift</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">F</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">全文検索（一覧の上の検索欄へ移る）</td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="toggle-edit-preview">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">E</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">編集のみとプレビューのみを切り替える</td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="toggle-side-by-side">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">P</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">左右に並べる（もう一度押すと元に戻る）</td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="toggle-focus-mode">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">Shift</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">D</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">集中モードに入る・終える</td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="toggle-sidebar">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">\</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">サイドバーを隠す・出す</td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="back forward">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Alt</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">←</kbd></span
+                        ><span class="kbd-sep">・</span
+                        ><span class="keys-table__combo"
+                          ><kbd class="kbd">Alt</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">→</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">
+                        前に開いたノートへ戻る・戻る前のノートへ進む
+                      </td>
+                    </tr>
+                    <tr
+                      data-testid="keyboard-row"
+                      data-shortcut-id="status-none status-active status-on-hold status-completed status-dropped"
+                    >
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Shift</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">Alt</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">1</kbd><span class="kbd-sep">〜</span
+                          ><kbd class="kbd">5</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">
+                        ステータスを「なし」「進行中」「保留」「完了」「中止」にする
+                      </td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="print-note">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">Shift</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">P</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">開いているノートを印刷する</td>
+                    </tr>
+                    <tr
+                      data-testid="keyboard-row"
+                      data-shortcut-id="move-note"
+                      data-context="note-list"
+                    >
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"><kbd class="kbd">M</kbd></span>
+                      </td>
+                      <td class="keys-table__action">
+                        ノートブックへ移動する<span class="keys-table__context"
+                          >（ノートの一覧でノートを選んでいるとき）</span
+                        >
+                      </td>
+                    </tr>
+                    <tr
+                      data-testid="keyboard-row"
+                      data-shortcut-id="pin-note"
+                      data-context="note-list"
+                    >
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"><kbd class="kbd">P</kbd></span>
+                      </td>
+                      <td class="keys-table__action">
+                        ピン留めする・外す<span class="keys-table__context"
+                          >（ノートの一覧でノートを選んでいるとき）</span
+                        >
+                      </td>
+                    </tr>
+                    <tr
+                      data-testid="keyboard-row"
+                      data-shortcut-id="duplicate-note"
+                      data-context="note-list"
+                    >
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">D</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">
+                        ノートを複製する<span class="keys-table__context"
+                          >（ノートの一覧でノートを選んでいるとき）</span
+                        >
+                      </td>
+                    </tr>
+                    <tr
+                      data-testid="keyboard-row"
+                      data-shortcut-id="trash-note"
+                      data-context="note-list"
+                    >
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"><kbd class="kbd">Delete</kbd></span>
+                      </td>
+                      <td class="keys-table__action">
+                        ゴミ箱へ移動する<span class="keys-table__context"
+                          >（ノートの一覧でノートを選んでいるとき）</span
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">すべてのキーは、ヘルプの一覧で</h3>
+              <p class="feature-item__text" data-testid="keyboard-help">
+                すべてのキーは、アプリのメニューの「ヘルプ」にある「ショートカットの一覧」で確認できます。
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 9. 書き出す -->
+      <section
+        id="export"
+        class="section feature-section tone-parchment"
+        
+        data-section="export"
+        data-testid="section-export"
+      >
+        <div class="section__inner">
+          <h2 id="export-title" class="section__title" data-reveal="section-title">
+            書いたノートを、ほかの形でも渡せる
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image"
+              src="images/feature-export.png"
+              width="1040"
+              height="650"
+              loading="lazy"
+              alt="「山と湖の旅行の計画」のノートを HTML のファイルに書き出して表示したところ。題名の下に、日程の表と、ファイルに埋め込まれた山と湖の写真が表示されています。"
+              data-testid="feature-image"
+              data-picture="export"
+              data-scheme="light"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">HTML（画像を埋め込んだ1つのファイル）</h3>
+              <p class="feature-item__text">
+                画像を埋め込んだ1つの HTML のファイルに書き出します。そのファイルだけで、ほかの PC
+                のブラウザでも読めます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">PDF（A4）</h3>
+              <p class="feature-item__text">プレビューと同じ見た目で、A4 の PDF に書き出します。</p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Markdown（画像も一緒に）</h3>
+              <p class="feature-item__text">
+                Markdown 形式のファイル（.md）に書き出し、貼り付けた画像も一緒に書き出します。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">印刷</h3>
+              <p class="feature-item__text">Windows の印刷の画面から、ノートを印刷できます。</p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">HTML としてコピー</h3>
+              <p class="feature-item__text">
+                ノートを HTML としてコピーして、ほかのアプリに貼り付けられます。
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 10. 見た目 -->
+      <section
+        id="appearance"
+        class="section feature-section tone-white"
+        
+        data-section="appearance"
+        data-testid="section-appearance"
+      >
+        <div class="section__inner">
+          <h2 id="appearance-title" class="section__title" data-reveal="section-title">
+            明るい画面でも、暗い画面でも
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image feature-section__image--pair"
+              src="images/feature-appearance.png"
+              width="1960"
+              height="600"
+              loading="lazy"
+              alt="同じ画面を2つ並べた写真。左はライトの配色、右はダークの配色で、どちらも「保存が遅くなる不具合の調べもの」のノートを、編集画面とプレビューを左右に並べて表示しています。"
+              data-testid="feature-image"
+              data-picture="appearance"
+              data-scheme="light dark"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">ライト・ダーク・Windows の設定に合わせる</h3>
+              <p class="feature-item__text">
+                画面の配色は、ライト・ダーク・Windows の設定に合わせる、の3つから選べます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">日本語のフォントを同梱</h3>
+              <p class="feature-item__text">
+                日本語のフォント（Noto Sans JP）をアプリに同梱しているので、どの PC
+                でも同じ見た目で表示されます。
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">本文の文字の大きさを変えられる</h3>
+              <p class="feature-item__text">
+                Ctrl++ と Ctrl+-
+                で、エディタとプレビューの本文の文字を大きく・小さくできます。Ctrl+0
+                で元の大きさに戻ります。
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 11. よくある質問（問いを押すと答えが開く。閉じていてもページの中の検索で答えが見つかる） -->
+      <section id="faq" class="section faq tone-parchment"  data-testid="faq">
+        <div class="section__inner">
+          <h2 id="faq-title" class="section__title" tabindex="-1" data-reveal="section-title">
+            よくある質問
+          </h2>
+          <div class="faq__list" data-testid="faq-list">
+            <details class="faq__item" data-testid="faq-item" data-faq="price">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">無料ですか？</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>はい、無料です。広告も表示しません。</p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="account">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">アカウントは必要ですか？</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>いいえ、不要です。アカウントの登録やサインインをせずに使えます。</p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="where">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">ノートはどこに保存されますか？</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>
+                  自分で選んだ「ノートのフォルダ」に、Markdown
+                  形式のファイル（.md）として保存されます。配色などの設定、検索の索引、改訂履歴は、その
+                  PC の中のアプリ用の領域に保存されます。
+                </p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="other-apps">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">ほかのアプリでノートを開けますか？</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>はい、開けます。ほかのアプリで加えた変更も、Sumi Notes の画面に反映されます。</p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="offline">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">インターネットに接続しなくても使えますか？</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>
+                  はい、使えます。Sumi Notes
+                  がインターネットに接続するのは、ノートに書いた外部の画像を表示するときと、ノートの中のリンクを押してブラウザで開くときだけです。
+                </p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="sync">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">同期の機能やスマートフォン版はありますか？</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>
+                  同期の機能とスマートフォン版はありません。ノートのフォルダを、OneDrive
+                  などの同期サービスのフォルダの中に置くこともできます。そのときのファイルの取り扱いは、その同期サービスの定めに従います。
+                </p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="uninstall">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">アプリを削除すると、ノートも消えますか？</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>
+                  消えません。アプリをアンインストールしても、ノートのフォルダとその中のノートは残ります。
+                </p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="windows">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">どの Windows で使えますか？</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>
+                  Windows 10（バージョン 2004 以降）または Windows 11 の、64
+                  ビット版（x64）で使えます。Mac とスマートフォンでは使えません。
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12. 締め -->
+      <section id="closing" class="section closing tone-dark"  data-testid="closing">
+        <div class="section__inner closing__inner">
+          <h2 id="closing-title" class="section__title" data-reveal="closing-title">
+            書いたノートを、ずっと自分の手元に。
+          </h2>
+          <p class="closing__text" data-reveal="closing-text">
+            利用者の情報を収集せず、どこにも送信しません。インターネットに接続していない環境でも使用できます。
+          </p>
+          <a
+            class="button button--primary"
+            href="#download"
+            data-store-link
+            data-testid="download-button-closing"
+            data-reveal="closing-action"
+            >Microsoft Store から入手</a
+          >
+        </div>
+      </section>
+
+      <!-- 13. 入手の方法 -->
+      <section id="download" class="section download tone-white"  data-testid="download">
         <div class="section__inner">
           <h2 id="download-title" class="section__title" tabindex="-1" data-reveal="download-title">
             入手の方法
@@ -306,25 +998,15 @@
               <dd class="download__desc">登録不要</dd>
             </div>
           </dl>
-        </div>
-      </section>
-
-      <section class="section closing" aria-labelledby="closing-title" data-testid="closing">
-        <div class="section__inner closing__inner">
-          <h2 id="closing-title" class="section__title" data-reveal="closing-title">
-            書いたノートを、ずっと自分の手元に。
-          </h2>
-          <p class="closing__text" data-reveal="closing-text">
-            利用者の情報を収集せず、どこにも送信しません。インターネットに接続していない環境でも使用できます。
-          </p>
-          <a
-            class="button button--primary"
-            href="#download"
-            data-store-link
-            data-testid="download-button-closing"
-            data-reveal="closing-action"
-            >Microsoft Store から入手</a
-          >
+          <div class="download__actions" data-reveal="download-action">
+            <a
+              class="button button--primary"
+              href="#download"
+              data-store-link
+              data-testid="download-button-download"
+              >Microsoft Store から入手</a
+            >
+          </div>
         </div>
       </section>
     </main>

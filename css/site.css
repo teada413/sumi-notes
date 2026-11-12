@@ -23,9 +23,9 @@ body {
   background: var(--color-bg-page);
   color: var(--color-text);
   font-family: var(--font-sans);
-  font-size: var(--font-size-body-md);
+  font-size: var(--font-size-site-body);
   font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-body-md);
+  line-height: var(--line-height-site-body);
   overflow-wrap: anywhere;
   font-variant-numeric: lining-nums;
 }
@@ -39,6 +39,14 @@ h3,
   overflow-wrap: normal;
   word-break: auto-phrase;
   text-wrap: balance;
+}
+
+/*
+ * 英語のページ（Sprint 54）: 語の途中では折り返さない。枠に収まらない長い語（URL など）だけを折る
+ * （日本語のページの anywhere は、和文の行の折り返しのため）。
+ */
+body:lang(en) {
+  overflow-wrap: break-word;
 }
 
 img {
@@ -142,12 +150,189 @@ kbd {
   align-items: center;
   min-height: var(--touch-target-min);
   color: var(--color-text);
-  font-size: var(--font-size-body-sm);
-  line-height: var(--line-height-body-sm);
+  font-size: var(--font-size-site-nav);
+  line-height: var(--line-height-site-nav);
+  letter-spacing: var(--letter-spacing-site-nav);
+}
+
+.site-nav__link:hover {
+  color: var(--color-link);
+  text-decoration: none;
 }
 
 .site-nav__link[aria-current='page'] {
   color: var(--color-link);
+}
+
+/*
+ * 言語の切り替え（Sprint 54）: 同じ内容の相手の言語のページへのリンク（日本語のページは「English」、
+ * 英語のページは「Japanese」）。メニューのリンクの並び（.site-nav__list）の外に置き、狭い幅でも
+ * メニューにしまわず、ボタンの左に出す。
+ */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 0 var(--space-lg);
+}
+
+/*
+ * Designer (Sprint 54): the switch reads as a small utility button, not as one more page link -
+ * a hairline outline with 8px corners (design-tokens button-utility: rounded.md, hairline) drawn
+ * inside the 44px hit area (the outline is 28px tall: 8px above and below), the label in the
+ * header links' type. The same at every width; on narrow widths it sits left of the menu button.
+ */
+.site-nav__lang {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target-min);
+  padding: 0 var(--space-sm);
+  color: var(--color-text);
+  font-size: var(--font-size-site-nav);
+  line-height: var(--line-height-site-nav);
+  letter-spacing: var(--letter-spacing-site-nav);
+  white-space: nowrap;
+}
+
+.site-nav__lang::before {
+  content: '';
+  position: absolute;
+  inset: var(--lang-switch-inset) 0;
+  border: 1px solid var(--color-lang-switch-border);
+  border-radius: var(--radius-md);
+  pointer-events: none;
+}
+
+.site-nav__lang:hover {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+.site-nav__lang:hover::before {
+  border-color: var(--color-link);
+}
+
+.site-nav__lang:focus-visible {
+  border-radius: var(--radius-md);
+}
+
+/*
+ * ハンバーガーメニュー（Sprint 53。js/nav.js が <html> に .nav-ready を付けたときだけ働く）。
+ * 切り替える幅は下の @media の1か所（js/nav.js はボタンが表示されているかで判断する）。
+ * 開いたリンクの並びは、ヘッダーの下に、ページの内容の上に重ねて出す。
+ */
+.site-header {
+  position: relative;
+  z-index: var(--z-header);
+}
+
+.site-nav__toggle {
+  display: none;
+}
+
+@media (max-width: 833px) {
+  /* 言語の切り替えのリンクを、メニューのボタンの左に */
+  .nav-ready .site-nav__toggle {
+    order: 1;
+  }
+
+  .nav-ready .site-nav__toggle {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--nav-toggle-bar-gap);
+    width: var(--touch-target-min);
+    height: var(--touch-target-min);
+    margin-right: calc(-1 * var(--space-xs));
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .nav-ready .site-nav__toggle-bar {
+    display: block;
+    width: var(--nav-toggle-bar-width);
+    height: var(--nav-toggle-bar-height);
+    border-radius: var(--radius-full);
+    background: currentColor;
+    transition:
+      transform var(--nav-menu-duration) var(--nav-menu-easing),
+      opacity var(--nav-menu-duration) var(--nav-menu-easing);
+  }
+
+  /* 開いているときは × の形 */
+  .nav-ready .site-nav.is-open .site-nav__toggle-bar:nth-child(1) {
+    transform: translateY(calc(var(--nav-toggle-bar-gap) + var(--nav-toggle-bar-height)))
+      rotate(45deg);
+  }
+
+  .nav-ready .site-nav.is-open .site-nav__toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-ready .site-nav.is-open .site-nav__toggle-bar:nth-child(3) {
+    transform: translateY(calc(-1 * (var(--nav-toggle-bar-gap) + var(--nav-toggle-bar-height))))
+      rotate(-45deg);
+  }
+
+  .nav-ready .site-nav__list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-xs) var(--layout-gutter) var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-nav-menu);
+    box-shadow: var(--shadow-nav-menu);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--nav-menu-distance)));
+    transition:
+      opacity var(--nav-menu-duration) var(--nav-menu-easing),
+      transform var(--nav-menu-duration) var(--nav-menu-easing),
+      visibility 0s linear var(--nav-menu-duration);
+  }
+
+  .nav-ready .site-nav.is-open .site-nav__list {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity var(--nav-menu-duration) var(--nav-menu-easing),
+      transform var(--nav-menu-duration) var(--nav-menu-easing),
+      visibility 0s linear 0s;
+  }
+
+  .nav-ready .site-nav__list li + li {
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* The reference's phone menu: large, semibold links in a column (tagline size) */
+  .nav-ready .site-nav__link {
+    display: flex;
+    width: 100%;
+    min-height: calc(var(--touch-target-min) + var(--space-sm));
+    font-size: var(--font-size-site-menu);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-site-h3);
+    letter-spacing: var(--letter-spacing-site-h3);
+  }
+}
+
+/* 動きを減らす設定では、メニューは動かずにすぐ開け閉めする */
+@media (prefers-reduced-motion: reduce) {
+  .nav-ready .site-nav__list,
+  .nav-ready .site-nav.is-open .site-nav__list,
+  .nav-ready .site-nav__toggle-bar {
+    transition: none;
+  }
 }
 
 /* --- ボタン（マーケティングの CTA は pill） --------------------------------------------- */
@@ -160,14 +345,19 @@ kbd {
   padding: var(--space-xs) var(--space-lg);
   border: 1px solid transparent;
   border-radius: var(--radius-full);
-  font-size: var(--font-size-button);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-site-body);
+  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-body-md);
   text-align: center;
 }
 
 .button:hover {
   text-decoration: none;
+}
+
+/* The reference's press: the button shrinks a little */
+.button:active {
+  transform: scale(0.95);
 }
 
 .button--primary {
@@ -220,16 +410,21 @@ kbd {
 
 .hero__title {
   margin: 0;
-  font-size: var(--font-size-display-1);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-heading-1);
-  letter-spacing: var(--letter-spacing-display-1);
+  font-size: var(--font-size-site-display);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-site-display);
+  letter-spacing: var(--letter-spacing-site-display);
 }
 
 .hero__lead {
   margin: 0;
-  font-size: var(--font-size-title);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-site-lead);
   line-height: var(--line-height-prose);
+}
+
+.hero__hook {
+  color: var(--color-text);
 }
 
 /* 説明の書き出しの1文（キャッチコピーの続き）は1行に立て、続きの説明と分ける */
@@ -353,67 +548,173 @@ kbd {
 
 .section__title {
   margin: 0 0 var(--space-xxl);
-  font-size: var(--font-size-heading-1);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-heading-1);
-  letter-spacing: var(--letter-spacing-heading-1);
+  font-size: var(--font-size-site-h2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-site-h2);
+  letter-spacing: var(--letter-spacing-site-h2);
 }
 
-/* --- 特徴 ------------------------------------------------------------------------ */
 /*
- * 並び: 文字だけの2枚（ショートカットを大きく見せる白いカード）を横に並べ、
- * そのあと画面の写真の4つを、文字と写真を左右に分けた行にして、左右を交互にする。
- * 写真の行はカードの枠を付けず、地の上に直接置く。
+ * The grounds of the sections (Sprint 53, the reference's tiles): white, parchment and the
+ * near-black tile, edge to edge, the change of ground itself being the divider. The dark tile
+ * re-points the text, rule, link and panel roles to their on-dark values for everything in it.
+ */
+.tone-white {
+  background: var(--color-bg-section);
+}
+
+.tone-parchment {
+  background: var(--color-bg-section-alt);
+  --color-bg-panel: var(--color-bg-panel-on-alt);
+}
+
+.tone-dark {
+  background: var(--color-bg-section-dark);
+  color: var(--color-on-tile);
+  --color-text: var(--color-on-tile);
+  --color-text-secondary: var(--color-on-tile-secondary);
+  --color-text-muted: var(--color-on-tile-muted);
+  --color-link: var(--color-link-on-dark);
+  --color-border: var(--color-on-tile-hairline);
+  --color-focus-ring: var(--color-focus-ring-on-dark);
+  --color-bg-panel: var(--color-tile-card);
+  --color-bg-kbd: var(--color-tile);
+  --color-button-secondary-text: var(--color-link-on-dark);
+  --color-button-secondary-border: var(--color-link-on-dark);
+  --color-button-secondary-bg-hover: var(--color-tile-card);
+}
+
+/* --- 機能の区切り（手元のファイル〜見た目。Sprint 53） ------------------------------------- */
+/*
+ * 1つの区切り: 見出し（h2）、写真（1枚。キーボードには無い）、小見出し（h3）と短い説明の並び。
+ * 区切りの地は --color-bg-section と --color-bg-section-alt（.feature-section--alt）を交互に使う。
+ * 交互の配色・写真と文の配置は designer が決める（ここは最低限の並び）。
  */
 
-.features {
-  padding-top: var(--space-section-narrow);
+/* The heading of a section stands centred over its picture, like the reference's tiles */
+.feature-section .section__title {
+  margin-right: auto;
+  margin-bottom: var(--space-split);
+  margin-left: auto;
+  max-width: var(--layout-prose-width);
+  text-align: center;
 }
 
-.features__grid {
+.feature-section__figure {
+  margin: 0 0 var(--space-split);
+}
+
+.feature-section__image {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-level-1);
+}
+
+/* 図（手元のファイル）は大きくしすぎない */
+.feature-section__image--figure {
+  max-width: var(--layout-figure-max-width);
+  margin: 0 auto;
+}
+
+/* 見た目: ライトとダークを並べた1枚（地が透けた PNG。枠と影は付けない） */
+.feature-section__image--pair {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.feature-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--feature-item-min-width)), 1fr));
+  gap: var(--space-xxl) var(--space-lg);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.feature-card {
+.feature-list--single {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: var(--layout-prose-width);
+  margin: 0 auto;
+}
+
+.feature-item {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   min-width: 0;
 }
 
-.feature-card__title {
+.feature-item__title {
   margin: 0;
-  font-size: var(--font-size-heading-3);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-heading-3);
-  letter-spacing: var(--letter-spacing-heading-3);
+  font-size: var(--font-size-site-h3);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-site-h3);
+  letter-spacing: var(--letter-spacing-site-h3);
 }
 
-.feature-card__text {
+.feature-item__text {
   margin: 0;
   color: var(--color-text-secondary);
-  font-size: var(--font-size-body-md);
+  font-size: var(--font-size-site-body);
   line-height: var(--line-height-prose);
 }
 
-.feature-card__keys {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-xxs);
-  margin: 0;
+.feature-item__text a {
+  text-decoration: underline;
 }
 
-.feature-card__key-label {
-  margin-left: var(--space-xs);
+/* --- キーボードの表 --------------------------------------------------------------------- */
+
+.keys-table__scroll {
+  max-width: 100%;
+}
+
+.keys-table {
+  width: 100%;
+  margin-top: var(--space-xs);
+  border-radius: var(--radius-lg);
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--color-bg-panel);
+  font-size: var(--font-size-site-body);
+  line-height: var(--line-height-body-md);
+}
+
+/* The key column keeps each combination on one line; the action takes the rest */
+.keys-table__keys {
+  width: 40%;
+}
+
+.keys-table__head {
+  padding: var(--space-md) var(--space-lg) var(--space-xs);
   color: var(--color-text-muted);
   font-size: var(--font-size-caption);
-  line-height: var(--line-height-caption);
+  font-weight: var(--font-weight-semibold);
+  text-align: left;
+}
+
+.keys-table td {
+  padding: var(--space-sm) var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  vertical-align: baseline;
+}
+
+/* 1つの組み合わせ（Ctrl+Shift+F など）は途中で折り返さない。折り返すのは組み合わせの間だけ */
+.keys-table__combo {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.keys-table__action {
+  color: var(--color-text);
+}
+
+.keys-table__context {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
 }
 
 .kbd {
@@ -428,105 +729,91 @@ kbd {
   font-size: var(--font-size-caption);
   line-height: var(--line-height-body-md);
   text-align: center;
+  white-space: nowrap;
 }
 
-.kbd-plus {
+.kbd-plus,
+.kbd-sep {
   color: var(--color-text-muted);
   font-size: var(--font-size-caption);
 }
 
-.feature-card__image {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-level-1);
+.kbd-plus {
+  padding: 0 var(--space-xxs);
 }
 
-/* 文字だけのカードに置く図（最初のカードの、フォルダに .md のファイルが並ぶ様子の図） */
-.feature-card__figure {
-  width: 100%;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+.kbd-sep {
+  padding: 0 var(--space-xs);
 }
 
-/* 文字だけのカード（feature-card: surface・rounded.lg・padding 24px・罫線）。下の段はキーのくぼみか図 */
-.feature-card--keys {
-  order: 1;
-  /* 説明の行が余りの高さを受け持ち、キーのくぼみを下端にそろえる（margin: auto を使わない） */
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  padding: var(--space-lg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-bg-card);
-}
+/* --- よくある質問（<details>。問いを押すと答えが開く） -------------------------------------- */
 
-.feature-card--keys .feature-card__keys {
-  justify-content: center;
-  gap: var(--space-xs);
-  padding: var(--space-lg) var(--space-md);
-  border-radius: var(--radius-md);
-  background: var(--color-bg-well);
-}
-
-.feature-card--keys .kbd {
-  min-width: var(--space-xxl);
-  padding: var(--space-xxs) var(--space-sm);
-  background: var(--color-bg-card);
-  font-size: var(--kbd-size-large);
-  line-height: var(--line-height-title);
-}
-
-.feature-card--keys .feature-card__key-label {
-  flex-basis: 100%;
-  margin: var(--space-xxs) 0 0;
+.faq .section__title {
+  margin-right: auto;
+  margin-bottom: var(--space-split);
+  margin-left: auto;
   text-align: center;
 }
 
-/* 写真の行: 文字（1）と写真（2）。文字は縦の中央に寄せる */
-.feature-card--wide {
-  order: 2;
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  grid-template-rows: 1fr auto auto auto 1fr;
-  column-gap: var(--space-split);
-  row-gap: var(--space-sm);
-  margin-top: var(--space-section-narrow);
+.faq__list {
+  max-width: var(--layout-prose-width);
+  margin: 0 auto;
+  border-top: 1px solid var(--color-border);
 }
 
-.feature-card--wide > :not(img) {
-  grid-column: 1;
+.faq__item {
+  border-bottom: 1px solid var(--color-border);
 }
 
-.feature-card--wide .feature-card__title {
-  grid-row: 2;
+.faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  min-height: var(--touch-target-min);
+  padding: var(--space-lg) 0;
+  cursor: pointer;
+  list-style: none;
 }
 
-.feature-card--wide .feature-card__text {
-  grid-row: 3;
+.faq__question:hover .faq__question-text {
+  color: var(--color-link);
 }
 
-.feature-card--wide .feature-card__keys {
-  grid-row: 4;
-  margin-top: var(--space-xs);
+.faq__question::-webkit-details-marker {
+  display: none;
 }
 
-.feature-card--wide .feature-card__image {
-  grid-column: 2;
-  grid-row: 1 / -1;
+/* 開いているか閉じているかの印（＋ と −） */
+.faq__question::after {
+  content: '+';
+  flex: none;
+  width: var(--space-lg);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-site-h3);
+  line-height: var(--line-height-site-h3);
+  text-align: center;
 }
 
-/* 左右を入れ替えた行 */
-.feature-card--flip {
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+.faq__item[open] > .faq__question::after {
+  content: '−';
 }
 
-.feature-card--flip > :not(img) {
-  grid-column: 2;
+.faq__question-text {
+  margin: 0;
+  font-size: var(--font-size-site-h3-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-site-h3);
 }
 
-.feature-card--flip .feature-card__image {
-  grid-column: 1;
+.faq__answer {
+  padding: 0 var(--space-xxl) var(--space-lg) 0;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-prose);
+}
+
+.faq__answer p {
+  margin: 0;
 }
 
 /* --- 入手の方法 ---------------------------------------------------------------------- */
@@ -554,9 +841,8 @@ kbd {
   grid-column: 2;
   grid-row: 1 / -1;
   margin: 0;
-  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  background: var(--color-bg-card);
+  background: var(--color-bg-panel);
 }
 
 .download__row {
@@ -573,7 +859,7 @@ kbd {
 
 .download__term {
   color: var(--color-text-muted);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-caption);
   line-height: var(--line-height-body-md);
   white-space: nowrap;
 }
@@ -593,28 +879,26 @@ kbd {
 }
 
 /* ページの中のリンクで移った先の見出し（main.js がフォーカスを移す。tabindex="-1"） */
-#features-title,
-#download-title {
+.section__title[tabindex='-1'] {
   /* キーボードで移ったときの枠を、行の幅いっぱいではなく見出しの文字に沿わせる */
   width: fit-content;
   border-radius: var(--radius-xs);
 }
 
-#features-title:focus,
-#download-title:focus {
+.section__title[tabindex='-1']:focus {
   outline: none;
 }
 
-#features-title:focus-visible,
-#download-title:focus-visible {
+.section__title[tabindex='-1']:focus-visible {
   outline: var(--focus-ring-width) solid var(--color-focus-ring);
 }
 
-/* --- 締め（Level 1 の影の浮いた面: feature-card-elevated・rounded.xl） ------------------- */
-
-.closing {
-  padding: 0 var(--layout-gutter) var(--space-section);
+.download__actions {
+  grid-column: 1;
+  margin-top: var(--space-lg);
 }
+
+/* --- 締め（Sprint 53: 黒に近い面の1枚。カードと影はやめ、地の切り替えで区切る） -------------- */
 
 .closing__inner {
   display: flex;
@@ -622,15 +906,6 @@ kbd {
   align-items: center;
   gap: var(--space-lg);
   text-align: center;
-}
-
-.closing .section__inner {
-  max-width: calc(var(--layout-max-width) - 2 * var(--layout-gutter));
-  padding: var(--space-section-narrow) var(--space-xxl);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background: var(--color-bg-card);
-  box-shadow: var(--shadow-level-1);
 }
 
 .closing__inner .section__title {
@@ -705,10 +980,10 @@ kbd {
 
 .prose__title {
   margin: 0 0 var(--space-sm);
-  font-size: var(--font-size-heading-1);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-heading-1);
-  letter-spacing: var(--letter-spacing-heading-1);
+  font-size: var(--font-size-site-h2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-site-h2);
+  letter-spacing: var(--letter-spacing-site-h2);
 }
 
 .prose__updated {
@@ -720,10 +995,10 @@ kbd {
 
 .prose h2 {
   margin: var(--space-split) 0 var(--space-sm);
-  font-size: var(--font-size-heading-2);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-heading-2);
-  letter-spacing: var(--letter-spacing-heading-2);
+  font-size: var(--font-size-site-h2-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-site-h2);
+  letter-spacing: var(--letter-spacing-site-h2-sm);
 }
 
 .prose p,
@@ -803,8 +1078,8 @@ kbd {
   border-radius: var(--radius-md);
   background: var(--color-bg-card);
   color: var(--color-text);
-  font-size: var(--font-size-button);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-site-body);
+  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-body-md);
   font-variant-numeric: tabular-nums;
   text-decoration: none;
@@ -851,38 +1126,54 @@ kbd {
 
 /* --- 幅ごとの並び（design-tokens の Desktop / Tablet / Mobile） ------------------------------ */
 
-@media (max-width: 1079px) {
+/* The reference's hero ladder: 56px -> 40px at 1068px -> 34px at 640px; h2 / h3 step down at 640px */
+@media (max-width: 1068px) {
   .hero__title {
-    font-size: var(--font-size-display-2);
-    letter-spacing: var(--letter-spacing-display-2);
+    font-size: var(--font-size-site-display-md);
+    letter-spacing: var(--letter-spacing-site-display-md);
   }
 }
 
-/* Tablet 以下: 写真の行は、文字の下に写真を置く（写真を幅いっぱいにして読みやすく） */
-@media (max-width: 840px) {
-  .feature-card--wide,
-  .feature-card--flip {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: none;
-    margin-top: var(--space-xxl);
+@media (max-width: 640px) {
+  .hero__title {
+    font-size: var(--font-size-site-display-sm);
+    letter-spacing: var(--letter-spacing-site-display-sm);
   }
 
-  .feature-card--wide .feature-card__title,
-  .feature-card--wide .feature-card__text,
-  .feature-card--wide .feature-card__keys,
-  .feature-card--wide .feature-card__image,
-  .feature-card--flip .feature-card__title,
-  .feature-card--flip .feature-card__text,
-  .feature-card--flip .feature-card__keys,
-  .feature-card--flip .feature-card__image {
-    grid-column: 1;
-    grid-row: auto;
+  .hero__lead {
+    font-size: var(--font-size-site-body);
   }
 
-  .feature-card--wide .feature-card__image {
-    margin-top: var(--space-xs);
+  .section__title,
+  .prose__title {
+    font-size: var(--font-size-site-h2-sm);
+    letter-spacing: var(--letter-spacing-site-h2-sm);
   }
 
+  .prose h2 {
+    font-size: var(--font-size-site-h3);
+    letter-spacing: var(--letter-spacing-site-h3);
+  }
+
+  .feature-item__title {
+    font-size: var(--font-size-site-h3-sm);
+    letter-spacing: 0;
+  }
+
+  /*
+   * The values of the download table in --font-size-download-desc-narrow (16px, one step under
+   * the 17px body) at <= 640px: at 17px the longest phrase (Windows 10（バージョン 2004 以降）)
+   * is about 302px and ran 6.5px out of the 295px dd at 375px (and had 1.5px to spare at 601px);
+   * at 16px it is about 284px and fits from 375px up. Below 375px the phrases wrap at phrase
+   * boundaries only (the 374px rule).
+   */
+  .download__desc {
+    font-size: var(--font-size-download-desc-narrow);
+  }
+}
+
+/* 1068px 以下（資料の small desktop）: 入手の方法の表は、文の下に置く（表の文字が欄に収まるように） */
+@media (max-width: 1068px) {
   .download .section__inner {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: none;
@@ -899,38 +1190,8 @@ kbd {
 }
 
 @media (max-width: 600px) {
-  /*
-   * Phones: the four links take their own full-width row under the name, in caption size
-   * (14px), spread from gutter to gutter. At 375px they need 294px of the 327px, so they stay
-   * on one line (at 15px with the 16px gap the fourth link fell to a third row of its own).
-   * Narrower than about 330px they wrap again.
-   */
-  .site-nav {
-    flex-basis: 100%;
-  }
-
-  .site-nav__list {
-    justify-content: space-between;
-    gap: 0 var(--space-xs);
-  }
-
-  .site-nav__link {
-    font-size: var(--font-size-caption);
-    line-height: var(--line-height-caption);
-  }
-
   .hero {
     padding-top: var(--space-xxl);
-  }
-
-  .hero__title {
-    font-size: var(--font-size-heading-1);
-    line-height: var(--line-height-heading-1);
-    letter-spacing: var(--letter-spacing-heading-1);
-  }
-
-  .hero__lead {
-    font-size: var(--font-size-body-md);
   }
 
   .hero__actions,
@@ -951,42 +1212,36 @@ kbd {
     padding: var(--space-section-narrow) 0;
   }
 
-  .section__title,
-  .prose__title {
-    font-size: var(--font-size-heading-2);
-    line-height: var(--line-height-heading-2);
-    letter-spacing: var(--letter-spacing-heading-2);
+  .keys-table td,
+  .keys-table__head {
+    padding: var(--space-xs) var(--space-sm);
   }
 
-  .features__grid {
-    grid-template-columns: minmax(0, 1fr);
+  /* 電話の幅: キーの下に操作を置く（操作の欄が細くなりすぎないように） */
+  .keys-table thead {
+    display: none;
   }
 
-  /*
-   * The first card's figure runs to the card's sides and bottom on phones (325px instead of
-   * 279px wide at 375px), so the file names in it stay readable. The card drops its side and
-   * bottom padding and the title and text keep theirs, so the figure stays inside the card's
-   * box; the card's border and rounded corners frame it, the figure keeps only the rule above.
-   */
-  .feature-card--keys:has(> .feature-card__figure) {
-    padding: var(--space-lg) 0 0;
-    overflow: hidden;
+  .keys-table tr,
+  .keys-table td {
+    display: block;
   }
 
-  .feature-card--keys:has(> .feature-card__figure) > :not(.feature-card__figure) {
-    margin-inline: var(--space-lg);
+  .keys-table tr + tr {
+    border-top: 1px solid var(--color-border);
   }
 
-  .feature-card__figure {
-    border-width: 1px 0 0;
-    border-radius: 0;
+  .keys-table td {
+    width: auto;
+    border-top: 0;
   }
 
-  .feature-card__title {
-    font-size: var(--font-size-title);
-    font-weight: var(--font-weight-semibold);
-    line-height: var(--line-height-title);
-    letter-spacing: var(--letter-spacing-title);
+  .keys-table td.keys-table__action {
+    padding-top: 0;
+  }
+
+  .download__actions .button {
+    width: 100%;
   }
 
   .download__row {
@@ -994,14 +1249,6 @@ kbd {
     gap: var(--space-xxs);
     /* 16px（24px から）: 375px で dd が 293px になり、最も長いまとまり（約 283px）が収まる */
     padding: var(--space-md);
-  }
-
-  .closing {
-    padding-bottom: var(--space-section-narrow);
-  }
-
-  .closing .section__inner {
-    padding: var(--space-xxl) var(--space-lg);
   }
 
   .prose h2 {

@@ -1,0 +1,1082 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Sumi Notes — Save and Organize Without Second-Guessing</title>
+    <meta
+      name="description"
+      content="Always know where your notes are. Sumi Notes is a note app for Windows that saves what you write automatically and keeps it as Markdown files (.md) in a folder you choose."
+    />
+    <link rel="alternate" hreflang="ja" href="../index.html" />
+    <link rel="alternate" hreflang="en" href="index.html" />
+    <link rel="icon" href="../images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../css/fonts.css" />
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="../css/site.css" />
+    <script src="../js/config.js" defer></script>
+    <!-- main.js and nav.js are not deferred: they add .reveal-ready and .nav-ready to <html> before the page is shown. The page's own work starts on DOMContentLoaded (after config.js) -->
+    <script src="../js/main.js"></script>
+    <script src="../js/nav.js"></script>
+  </head>
+  <body>
+    <header class="site-header" data-testid="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html" data-testid="brand-link">
+          <svg class="brand__mark" viewBox="107 47 810 930" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient
+                id="brand-ink"
+                gradientUnits="userSpaceOnUse"
+                cx="422"
+                cy="526"
+                r="468"
+              >
+                <stop offset="0" class="brand__stop-ink-soft" />
+                <stop offset="0.6" class="brand__stop-ink" />
+              </radialGradient>
+            </defs>
+            <path
+              class="brand__rim"
+              d="M 512.0 76.9 L 766.6 331.4 A 360 360 0 1 1 257.4 331.4 Z"
+              fill="url(#brand-ink)"
+              stroke-width="60"
+              stroke-linejoin="round"
+            />
+            <ellipse
+              class="brand__light"
+              cx="362"
+              cy="556"
+              rx="48"
+              ry="104"
+              transform="rotate(-28 362 556)"
+              opacity="0.9"
+            />
+          </svg>
+          <span class="brand__name">Sumi Notes</span>
+        </a>
+        <nav class="site-nav" aria-label="Site" data-site-nav data-testid="site-nav">
+          <button
+            class="site-nav__toggle"
+            type="button"
+            aria-label="Menu"
+            aria-expanded="false"
+            aria-controls="site-nav-list"
+            data-nav-toggle
+            data-testid="nav-toggle"
+          >
+            <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+            <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+            <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+          </button>
+          <ul class="site-nav__list" id="site-nav-list" data-testid="nav-list">
+            <li><a class="site-nav__link" href="#features" data-testid="nav-features">Features</a></li>
+            <li><a class="site-nav__link" href="#faq" data-testid="nav-faq">FAQ</a></li>
+            <li>
+              <a class="site-nav__link" href="#download" data-testid="nav-download">Download</a>
+            </li>
+            <li>
+              <a class="site-nav__link" href="changelog.html" data-testid="nav-changelog"
+                >Version History</a
+              >
+            </li>
+            <li>
+              <a class="site-nav__link" href="privacy.html" data-testid="nav-privacy"
+                >Privacy Policy</a
+              >
+            </li>
+          </ul>
+          <a
+            class="site-nav__lang"
+            href="../index.html"
+            hreflang="ja"
+            data-testid="lang-switch"
+            >Japanese</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- 1. Hero -->
+      <section id="hero" class="hero" aria-labelledby="hero-title" data-testid="hero">
+        <div class="hero__inner">
+          <div class="hero__text">
+            <!-- prettier-ignore -->
+            <h1 id="hero-title" class="hero__title" data-reveal="hero-title">Save and Organize Without Second-Guessing</h1>
+            <p class="hero__lead" data-reveal="hero-lead">
+              <span class="hero__hook">Always know where your notes are.</span>
+              <span class="hero__name">Sumi Notes</span> is a note app for Windows that saves what
+              you write automatically and keeps it as Markdown files (.md) in a folder you choose.
+              There is nothing to save by hand. Organize notes with notebooks, statuses and tags,
+              and find them quickly with full-text search.
+            </p>
+            <div class="hero__actions" data-reveal="hero-actions">
+              <a
+                class="button button--primary"
+                href="#download"
+                data-store-link
+                data-testid="download-button-hero"
+                >Get from Microsoft Store</a
+              >
+              <a class="button button--secondary" href="#features" data-testid="features-button"
+                >See Features</a
+              >
+            </div>
+          </div>
+          <div class="hero__figure" data-reveal="hero-figure">
+            <div class="hero-shot" data-hero-tilt data-testid="hero-shot">
+              <img
+                class="hero-shot__image"
+                src="images/hero.png"
+                width="1280"
+                height="800"
+                alt="The Sumi Notes window. From the left: the notebooks, statuses and tags, the list of notes, and a travel plan note shown with the Markdown editor and the preview side by side. The preview shows a table, a photo and checkboxes."
+                data-testid="hero-image"
+                data-picture="hero"
+                data-scheme="light"
+              />
+            </div>
+          </div>
+          <ul
+            class="hero__facts"
+            data-reveal="hero-facts"
+            aria-label="About Sumi Notes"
+            data-testid="hero-facts"
+          >
+            <li class="chip">For Windows</li>
+            <li class="chip">Free</li>
+            <li class="chip chip--wide">Saved as Markdown Files (.md)</li>
+            <li class="chip">Works Offline</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 2. Files on your PC (the target of "Features" in the header; the id #features as on the Japanese page) -->
+      <section
+        id="features"
+        class="section feature-section tone-parchment"
+        data-section="files"
+        data-testid="section-files"
+      >
+        <div class="section__inner">
+          <h2 id="features-title" class="section__title" tabindex="-1" data-reveal="section-title">
+            Notes Stay Close at Hand as Markdown Files
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image feature-section__image--figure"
+              src="images/feature-files.png"
+              width="880"
+              height="640"
+              loading="lazy"
+              alt="A drawing of a notes folder. On the left are the folders Guide and Inbox, and notes such as Daily Report, Minutes and Travel Plan as Markdown files (.md). On the right, the opened Travel Plan file shows its first lines: the title, status and tags, then a few lines of the text."
+              data-testid="feature-image"
+              data-picture="files"
+              data-scheme="light"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">One File per Note, Saved Where You Choose</h3>
+              <p class="feature-item__text">
+                Each note is saved as its own Markdown file (.md) in the "notes folder" you choose.
+                Notebooks are folders inside that folder.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Opens in Other Apps</h3>
+              <p class="feature-item__text">
+                Notepad and other editors can open your notes as they are. Changes made in another
+                editor show up in Sumi Notes too.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Notes Stay After Uninstalling</h3>
+              <p class="feature-item__text">
+                Uninstalling the app does not delete the notes folder or the notes in it.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">No Account Needed</h3>
+              <p class="feature-item__text">
+                Start right away, without signing up or signing in.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Works Offline</h3>
+              <p class="feature-item__text">
+                You can write, organize and find notes without an internet connection.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Notes Are Never Sent Anywhere</h3>
+              <p class="feature-item__text">
+                Sumi Notes does not send information about you or the contents of your notes
+                anywhere. There is no usage tracking and no advertising. For details, see the
+                <a href="privacy.html" data-testid="files-privacy-link">Privacy Policy</a>.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 3. Write -->
+      <section
+        id="write"
+        class="section feature-section tone-dark"
+        data-section="write"
+        data-testid="section-write"
+      >
+        <div class="section__inner">
+          <h2 id="write-title" class="section__title" data-reveal="section-title">
+            Focus on Writing
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image"
+              src="images/feature-write.png"
+              width="1040"
+              height="650"
+              loading="lazy"
+              alt="Sumi Notes in the dark theme. The note Search Index Design Notes is shown with the editor on the left and the preview on the right. A slash was typed on an empty line of the editor, and a list of formatting commands such as headings and bold is shown."
+              data-testid="feature-image"
+              data-picture="write"
+              data-scheme="dark"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Monospaced Editor with Syntax Coloring</h3>
+              <p class="feature-item__text">
+                The editor uses a monospaced font and colors Markdown syntax such as headings,
+                lists and code. Lists and quotes continue on the next line when you press Enter.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Editor and Preview Side by Side</h3>
+              <p class="feature-item__text">
+                See the result in the preview on the right as you write. The two sides scroll
+                together. You can also switch to the editor only or the preview only.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Type "/" to Choose Formatting</h3>
+              <p class="feature-item__text">
+                Type "/" on an empty line to see 18 kinds of formatting, such as headings, tables,
+                task lists and code blocks. Choose one to insert its Markdown.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Toolbar for Selected Text</h3>
+              <p class="feature-item__text">
+                Select text to show buttons for headings, bold, links, lists and more.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Focus Mode</h3>
+              <p class="feature-item__text">
+                Hide the sidebar and the note list, and give the whole window to the editor.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Paste or Drop Images to Attach</h3>
+              <p class="feature-item__text">
+                Paste an image or drop it on the editor. It is saved in the notes folder and
+                inserted into the note.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Colored Code Blocks with Copy Button</h3>
+              <p class="feature-item__text">
+                Code blocks are colored for each language, and the button at the top right copies
+                the code.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 4. Organize -->
+      <section
+        id="organize"
+        class="section feature-section tone-white"
+        data-section="organize"
+        data-testid="section-organize"
+      >
+        <div class="section__inner">
+          <h2 id="organize-title" class="section__title" data-reveal="section-title">
+            Stay Organized as Notes Pile Up
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image"
+              src="images/feature-organize.png"
+              width="1040"
+              height="650"
+              loading="lazy"
+              alt="Sumi Notes in the light theme. The note Search Index Design Notes is being dragged from the note list onto the status Active in the sidebar. A small card with the note's icon and title follows the pointer, and Active is marked as the place to drop."
+              data-testid="feature-image"
+              data-picture="organize"
+              data-scheme="light"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Nested Notebooks</h3>
+              <p class="feature-item__text">
+                Create notebooks inside notebooks. Drag them in the sidebar to reorder them or to
+                put one inside another.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Page for Each Notebook</h3>
+              <p class="feature-item__text">
+                Open a notebook, and the sidebar becomes a page for that notebook alone, showing
+                the notebooks, statuses and tags inside it and how many notes each has.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Statuses (Active, On Hold, Completed, Dropped)</h3>
+              <p class="feature-item__text">
+                Give notes one of four statuses and filter by status. Notes marked Completed or
+                Dropped are hidden from the list automatically.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Tags with Colors</h3>
+              <p class="feature-item__text">
+                Add several tags to a note. Give tags colors, and filter notes by tag.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Pin Notes You Use Often</h3>
+              <p class="feature-item__text">Pinned notes stay at the top of the list.</p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Drag to Move Notes or Set Status and Tags</h3>
+              <p class="feature-item__text">
+                Drag a note from the note list to the sidebar to move it to a notebook, set its
+                status, add a tag or move it to the trash.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5. Find and link -->
+      <section
+        id="search"
+        class="section feature-section tone-dark"
+        data-section="search"
+        data-testid="section-search"
+      >
+        <div class="section__inner">
+          <h2 id="search-title" class="section__title" data-reveal="section-title">
+            Find What You Wrote Right Away
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image"
+              src="images/feature-search.png"
+              width="1040"
+              height="650"
+              loading="lazy"
+              alt="Sumi Notes in the dark theme, showing the results of a search for index. The word index is highlighted in the titles and text excerpts in the note list, and the preview of Search Index Design Notes is shown on the right."
+              data-testid="feature-image"
+              data-picture="search"
+              data-scheme="dark"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Search Every Note Instantly</h3>
+              <p class="feature-item__text">
+                Full-text search looks through all your notes and finds partial matches from a
+                single character, so results show up as you type. It treats uppercase and
+                lowercase letters as the same and highlights the words it finds in the list.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Best Matches First</h3>
+              <p class="feature-item__text">
+                Search results are sorted with the best matches first. You can also search only
+                inside the notebook or tag selected in the sidebar.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Find and Replace in Open Note</h3>
+              <p class="feature-item__text">
+                Find and replace words in the note you have open. Regular expressions are
+                supported.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Link Notes with "[["</h3>
+              <p class="feature-item__text">
+                Type "[[" to see the titles of other notes and insert a link. Links keep working
+                when you rename the linked note or move it to another notebook.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">List of Linking Notes (Backlinks)</h3>
+              <p class="feature-item__text">
+                In a linked note, see a list of the notes that link to it.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 6. Protect -->
+      <section
+        id="protect"
+        class="section feature-section tone-parchment"
+        data-section="protect"
+        data-testid="section-protect"
+      >
+        <div class="section__inner">
+          <h2 id="protect-title" class="section__title" data-reveal="section-title">
+            Bring Back What You Deleted or Changed
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image"
+              src="images/feature-history.png"
+              width="1040"
+              height="720"
+              loading="lazy"
+              alt="The revision history of a meeting note in the light theme. The list of versions is on the left, and the text of the selected version is on the right."
+              data-testid="feature-image"
+              data-picture="protect"
+              data-scheme="light"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Automatic Saving as You Type</h3>
+              <p class="feature-item__text">
+                There is nothing to save by hand. What you type is saved to the file
+                automatically.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Compare and Restore Versions in Revision History</h3>
+              <p class="feature-item__text">
+                Each time you stop typing, a version of the text is kept in the revision history.
+                See the differences from an earlier version, and restore it.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Restore Deleted Notes from Trash</h3>
+              <p class="feature-item__text">
+                Deleted notes go to the trash. Restore them later, choosing the notebook to put
+                them back in.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Pick Up Where You Left Off</h3>
+              <p class="feature-item__text">
+                When you start the app again, the open note, the cursor and scroll positions and
+                the search words come back as they were.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 7. Get started -->
+      <section
+        id="start"
+        class="section feature-section tone-dark"
+        data-section="start"
+        data-testid="section-start"
+      >
+        <div class="section__inner">
+          <h2 id="start-title" class="section__title" data-reveal="section-title">
+            Start Writing Today
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image"
+              src="images/feature-templates.png"
+              width="1040"
+              height="650"
+              loading="lazy"
+              alt="The template picker in the dark theme. The template names are listed by category on the left, and a sample of the selected Daily Report template is shown on the right."
+              data-testid="feature-image"
+              data-picture="start"
+              data-scheme="dark"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">29 Templates</h3>
+              <p class="feature-item__text">
+                Sumi Notes comes with 29 templates, such as Daily Report, Meeting Minutes, Travel
+                Plan and Bug Fix. Press Ctrl+T to choose one and create a note.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Use Custom Templates Too</h3>
+              <p class="feature-item__text">
+                Put notes into the "Templates" folder to use them as your own templates.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Five Notes on Getting Started</h3>
+              <p class="feature-item__text">
+                Start with a folder that has no notes, and five notes on how to use the app are
+                added. They show how to write Markdown and examples of use.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Use Existing Folders of Markdown Files</h3>
+              <p class="feature-item__text">
+                Use a folder of Markdown files (.md) you already have as your notes folder, just
+                as it is.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 8. Keyboard (no picture; a table only) -->
+      <section
+        id="keyboard"
+        class="section feature-section tone-white"
+        data-section="keyboard"
+        data-testid="section-keyboard"
+      >
+        <div class="section__inner">
+          <h2 id="keyboard-title" class="section__title" data-reveal="section-title">
+            Get Around Quickly by Keyboard
+          </h2>
+          <ul class="feature-list feature-list--single">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Common Shortcuts</h3>
+              <div class="keys-table__scroll">
+                <table class="keys-table" data-testid="keyboard-table">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="keys-table__head">Keys</th>
+                      <th scope="col" class="keys-table__head">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-testid="keyboard-row" data-shortcut-id="new-note">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">N</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">Create New Note</td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="new-from-template">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">T</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">Create Note from Template</td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="note-search">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">Shift</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">F</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">
+                        Search Notes (Go to Search Field Above List)
+                      </td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="toggle-edit-preview">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">E</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">
+                        Switch Between Editor Only and Preview Only
+                      </td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="toggle-side-by-side">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">P</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">Show Side by Side (Press Again to Go Back)</td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="toggle-focus-mode">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">Shift</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">D</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">Enter or Exit Focus Mode</td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="toggle-sidebar">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">\</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">Hide or Show Sidebar</td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="back forward">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Alt</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">←</kbd></span
+                        ><span class="kbd-sep">/</span
+                        ><span class="keys-table__combo"
+                          ><kbd class="kbd">Alt</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">→</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">
+                        Go Back to Previous Note / Go Forward to Next Note
+                      </td>
+                    </tr>
+                    <tr
+                      data-testid="keyboard-row"
+                      data-shortcut-id="status-none status-active status-on-hold status-completed status-dropped"
+                    >
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Shift</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">Alt</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">1</kbd><span class="kbd-sep">to</span
+                          ><kbd class="kbd">5</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">
+                        Set Status to "None", "Active", "On Hold", "Completed" or "Dropped"
+                      </td>
+                    </tr>
+                    <tr data-testid="keyboard-row" data-shortcut-id="print-note">
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">Shift</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">P</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">Print Open Note</td>
+                    </tr>
+                    <tr
+                      data-testid="keyboard-row"
+                      data-shortcut-id="move-note"
+                      data-context="note-list"
+                    >
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"><kbd class="kbd">M</kbd></span>
+                      </td>
+                      <td class="keys-table__action">
+                        Move to Notebook<span class="keys-table__context">
+                          (With Note Selected in Note List)</span
+                        >
+                      </td>
+                    </tr>
+                    <tr
+                      data-testid="keyboard-row"
+                      data-shortcut-id="pin-note"
+                      data-context="note-list"
+                    >
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"><kbd class="kbd">P</kbd></span>
+                      </td>
+                      <td class="keys-table__action">
+                        Pin or Unpin<span class="keys-table__context">
+                          (With Note Selected in Note List)</span
+                        >
+                      </td>
+                    </tr>
+                    <tr
+                      data-testid="keyboard-row"
+                      data-shortcut-id="duplicate-note"
+                      data-context="note-list"
+                    >
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"
+                          ><kbd class="kbd">Ctrl</kbd><span class="kbd-plus">+</span
+                          ><kbd class="kbd">D</kbd></span
+                        >
+                      </td>
+                      <td class="keys-table__action">
+                        Duplicate Note<span class="keys-table__context">
+                          (With Note Selected in Note List)</span
+                        >
+                      </td>
+                    </tr>
+                    <tr
+                      data-testid="keyboard-row"
+                      data-shortcut-id="trash-note"
+                      data-context="note-list"
+                    >
+                      <td class="keys-table__keys">
+                        <span class="keys-table__combo"><kbd class="kbd">Delete</kbd></span>
+                      </td>
+                      <td class="keys-table__action">
+                        Move to Trash<span class="keys-table__context">
+                          (With Note Selected in Note List)</span
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">All Shortcuts in Help</h3>
+              <p class="feature-item__text" data-testid="keyboard-help">
+                You can see every shortcut in "Keyboard Shortcuts" in the app's "Help" menu.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 9. Export -->
+      <section
+        id="export"
+        class="section feature-section tone-parchment"
+        data-section="export"
+        data-testid="section-export"
+      >
+        <div class="section__inner">
+          <h2 id="export-title" class="section__title" data-reveal="section-title">
+            Share Notes in Other Formats
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image"
+              src="images/feature-export.png"
+              width="1040"
+              height="650"
+              loading="lazy"
+              alt="The note Mountain and Lake Trip Plan exported as an HTML file and opened. Under the title are the schedule table and a photo of mountains and a lake embedded in the file."
+              data-testid="feature-image"
+              data-picture="export"
+              data-scheme="light"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">HTML (One File with Images Embedded)</h3>
+              <p class="feature-item__text">
+                Export a note as a single HTML file with its images embedded. That one file can be
+                read in a browser on another PC.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">PDF (A4)</h3>
+              <p class="feature-item__text">Export an A4 PDF that looks just like the preview.</p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Markdown (with Images)</h3>
+              <p class="feature-item__text">
+                Export a Markdown file (.md), together with the images pasted into the note.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Print</h3>
+              <p class="feature-item__text">Print notes from the Windows print screen.</p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Copy as HTML</h3>
+              <p class="feature-item__text">
+                Copy a note as HTML and paste it into other apps.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 10. Appearance -->
+      <section
+        id="appearance"
+        class="section feature-section tone-white"
+        data-section="appearance"
+        data-testid="section-appearance"
+      >
+        <div class="section__inner">
+          <h2 id="appearance-title" class="section__title" data-reveal="section-title">
+            Made for Light and Dark
+          </h2>
+          <figure class="feature-section__figure" data-reveal="section-figure">
+            <img
+              class="feature-section__image feature-section__image--pair"
+              src="images/feature-appearance.png"
+              width="1960"
+              height="600"
+              loading="lazy"
+              alt="The same window shown twice, side by side: the light theme on the left and the dark theme on the right. Both show the note Slow Save Investigation with the editor and the preview side by side."
+              data-testid="feature-image"
+              data-picture="appearance"
+              data-scheme="light dark"
+            />
+          </figure>
+          <ul class="feature-list">
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Light, Dark or Match Windows</h3>
+              <p class="feature-item__text">
+                Choose from three themes: Light, Dark, and Use OS Setting, which follows the
+                Windows setting.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Fonts Included</h3>
+              <p class="feature-item__text">
+                The fonts the app uses (Inter, Noto Sans JP and JetBrains Mono) come with it, so
+                text looks the same on any PC, whatever fonts are installed.
+              </p>
+            </li>
+            <li class="feature-item" data-testid="feature-item">
+              <h3 class="feature-item__title">Adjustable Text Size</h3>
+              <p class="feature-item__text">
+                Press Ctrl++ and Ctrl+- to make the text of the editor and the preview larger or
+                smaller. Press Ctrl+0 to go back to the original size.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 11. FAQ (click a question to open its answer; closed answers are still found by the browser's find in page) -->
+      <section id="faq" class="section faq tone-parchment" data-testid="faq">
+        <div class="section__inner">
+          <h2 id="faq-title" class="section__title" tabindex="-1" data-reveal="section-title">
+            Frequently Asked Questions
+          </h2>
+          <div class="faq__list" data-testid="faq-list">
+            <details class="faq__item" data-testid="faq-item" data-faq="price">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">Is it free?</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>Yes, it is free. It shows no ads either.</p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="account">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">Do I need an account?</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>No. You can use it without signing up or signing in.</p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="where">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">Where are my notes saved?</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>
+                  In the "notes folder" you choose, as Markdown files (.md). Settings such as the
+                  theme, the search index and the revision history are saved in the app's own
+                  storage on that PC.
+                </p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="other-apps">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">Can I open my notes in other apps?</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>Yes. Changes made in other apps show up in Sumi Notes too.</p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="offline">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">Does it work without an internet connection?</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>
+                  Yes. Sumi Notes connects to the internet only to show images from the web that a
+                  note refers to, and to open a link in a note in your browser when you click it.
+                </p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="sync">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">Is there a sync feature or a smartphone app?</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>
+                  There is no sync feature and no smartphone app. You can put the notes folder
+                  inside the folder of a sync service such as OneDrive. In that case, the files are
+                  handled under the terms of that sync service.
+                </p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="uninstall">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">If I uninstall the app, are my notes deleted?</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>
+                  No. Uninstalling the app leaves the notes folder and the notes in it as they are.
+                </p>
+              </div>
+            </details>
+            <details class="faq__item" data-testid="faq-item" data-faq="windows">
+              <summary class="faq__question" data-testid="faq-question">
+                <h3 class="faq__question-text">Which versions of Windows does it run on?</h3>
+              </summary>
+              <div class="faq__answer" data-testid="faq-answer">
+                <p>
+                  Windows 10 (version 2004 or later) or Windows 11, 64-bit (x64). It does not run
+                  on Mac or smartphones.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12. Closing -->
+      <section id="closing" class="section closing tone-dark" data-testid="closing">
+        <div class="section__inner closing__inner">
+          <h2 id="closing-title" class="section__title" data-reveal="closing-title">
+            Notes Stay Yours, Always
+          </h2>
+          <p class="closing__text" data-reveal="closing-text">
+            Sumi Notes does not collect any information about you and sends nothing anywhere. It
+            works without an internet connection.
+          </p>
+          <a
+            class="button button--primary"
+            href="#download"
+            data-store-link
+            data-testid="download-button-closing"
+            data-reveal="closing-action"
+            >Get from Microsoft Store</a
+          >
+        </div>
+      </section>
+
+      <!-- 13. Download -->
+      <section id="download" class="section download tone-white" data-testid="download">
+        <div class="section__inner">
+          <h2 id="download-title" class="section__title" tabindex="-1" data-reveal="download-title">
+            How to Get Sumi Notes
+          </h2>
+          <p class="download__text" data-reveal="download-text" data-testid="download-store">
+            Sumi Notes is free on Microsoft Store. Click "Get from Microsoft Store" to open the
+            Sumi Notes page on Microsoft Store. You can also find it by searching for "Sumi Notes"
+            in the Microsoft Store app.
+          </p>
+          <dl class="download__list" data-reveal="download-list">
+            <div class="download__row">
+              <dt class="download__term">Store</dt>
+              <dd class="download__desc">Microsoft Store</dd>
+            </div>
+            <div class="download__row">
+              <dt class="download__term">Price</dt>
+              <dd class="download__desc">Free</dd>
+            </div>
+            <div class="download__row">
+              <dt class="download__term">Supported OS</dt>
+              <dd class="download__desc">
+                <span class="download__line"
+                  ><span class="download__phrase">Windows 10 (version 2004 or later)</span>
+                  <span class="download__phrase">or Windows 11</span></span
+                ><span class="download__line"
+                  ><span class="download__phrase">64-bit (x64)</span></span
+                >
+              </dd>
+            </div>
+            <div class="download__row">
+              <dt class="download__term">Account</dt>
+              <dd class="download__desc">No Sign-Up Needed</dd>
+            </div>
+          </dl>
+          <div class="download__actions" data-reveal="download-action">
+            <a
+              class="button button--primary"
+              href="#download"
+              data-store-link
+              data-testid="download-button-download"
+              >Get from Microsoft Store</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-testid="site-footer">
+      <div class="site-footer__inner">
+        <a class="brand brand--footer" href="index.html">
+          <svg class="brand__mark" viewBox="107 47 810 930" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient
+                id="brand-ink-footer"
+                gradientUnits="userSpaceOnUse"
+                cx="422"
+                cy="526"
+                r="468"
+              >
+                <stop offset="0" class="brand__stop-ink-soft" />
+                <stop offset="0.6" class="brand__stop-ink" />
+              </radialGradient>
+            </defs>
+            <path
+              class="brand__rim"
+              d="M 512.0 76.9 L 766.6 331.4 A 360 360 0 1 1 257.4 331.4 Z"
+              fill="url(#brand-ink-footer)"
+              stroke-width="60"
+              stroke-linejoin="round"
+            />
+            <ellipse
+              class="brand__light"
+              cx="362"
+              cy="556"
+              rx="48"
+              ry="104"
+              transform="rotate(-28 362 556)"
+              opacity="0.9"
+            />
+          </svg>
+          <span class="brand__name">Sumi Notes</span>
+        </a>
+        <ul class="site-footer__links">
+          <li>
+            <a class="site-footer__link" href="privacy.html" data-testid="footer-privacy"
+              >Privacy Policy</a
+            >
+          </li>
+          <li>
+            <a class="site-footer__link" href="changelog.html" data-testid="footer-changelog"
+              >Version History</a
+            >
+          </li>
+          <li>
+            Contact (English or Japanese):
+            <a
+              class="site-footer__link"
+              href="mailto:sumi.notes.support@gmail.com"
+              data-testid="footer-contact"
+              >sumi.notes.support@gmail.com</a
+            >
+          </li>
+        </ul>
+        <p class="site-footer__copyright" data-testid="footer-copyright">© 2026 Sumi Notes</p>
+      </div>
+    </footer>
+  </body>
+</html>

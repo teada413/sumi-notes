@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Version History — Sumi Notes</title>
+    <meta
+      name="description"
+      content="The version history of Sumi Notes, a note app for Windows. The changes in each version, newest first."
+    />
+    <link rel="alternate" hreflang="ja" href="../changelog.html" />
+    <link rel="alternate" hreflang="en" href="changelog.html" />
+    <link rel="icon" href="../images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../css/fonts.css" />
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="../css/site.css" />
+    <!-- main.js: smooth scrolling of the links inside the page (#v1.0.3 and so on). This page has no data-reveal, so nothing fades in -->
+    <script src="../js/main.js"></script>
+    <script src="../js/nav.js"></script>
+  </head>
+  <body>
+    <header class="site-header" data-testid="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html" data-testid="brand-link">
+          <svg class="brand__mark" viewBox="107 47 810 930" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient
+                id="brand-ink"
+                gradientUnits="userSpaceOnUse"
+                cx="422"
+                cy="526"
+                r="468"
+              >
+                <stop offset="0" class="brand__stop-ink-soft" />
+                <stop offset="0.6" class="brand__stop-ink" />
+              </radialGradient>
+            </defs>
+            <path
+              class="brand__rim"
+              d="M 512.0 76.9 L 766.6 331.4 A 360 360 0 1 1 257.4 331.4 Z"
+              fill="url(#brand-ink)"
+              stroke-width="60"
+              stroke-linejoin="round"
+            />
+            <ellipse
+              class="brand__light"
+              cx="362"
+              cy="556"
+              rx="48"
+              ry="104"
+              transform="rotate(-28 362 556)"
+              opacity="0.9"
+            />
+          </svg>
+          <span class="brand__name">Sumi Notes</span>
+        </a>
+        <nav class="site-nav" aria-label="Site" data-site-nav data-testid="site-nav">
+          <button
+            class="site-nav__toggle"
+            type="button"
+            aria-label="Menu"
+            aria-expanded="false"
+            aria-controls="site-nav-list"
+            data-nav-toggle
+            data-testid="nav-toggle"
+          >
+            <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+            <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+            <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+          </button>
+          <ul class="site-nav__list" id="site-nav-list" data-testid="nav-list">
+            <li>
+              <a class="site-nav__link" href="index.html#features" data-testid="nav-features"
+                >Features</a
+              >
+            </li>
+            <li>
+              <a class="site-nav__link" href="index.html#faq" data-testid="nav-faq">FAQ</a>
+            </li>
+            <li>
+              <a class="site-nav__link" href="index.html#download" data-testid="nav-download"
+                >Download</a
+              >
+            </li>
+            <li>
+              <a
+                class="site-nav__link"
+                href="changelog.html"
+                aria-current="page"
+                data-testid="nav-changelog"
+                >Version History</a
+              >
+            </li>
+            <li>
+              <a class="site-nav__link" href="privacy.html" data-testid="nav-privacy"
+                >Privacy Policy</a
+              >
+            </li>
+          </ul>
+          <a
+            class="site-nav__lang"
+            href="../changelog.html"
+            hreflang="ja"
+            data-testid="lang-switch"
+            >Japanese</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="prose-page">
+      <article class="prose changelog" data-testid="changelog">
+        <h1 class="prose__title">Sumi Notes Version History</h1>
+
+        <p class="changelog__lead" data-testid="changelog-lead">
+          The changes in each version of Sumi Notes, newest first. The dates are when each version
+          was released on Microsoft Store.
+        </p>
+
+        <nav class="changelog__index" aria-label="Versions" data-testid="changelog-index">
+          <ul class="changelog__index-list">
+            <li>
+              <a class="changelog__index-link" href="#v1.0.3" data-testid="changelog-index-1.0.3"
+                >1.0.3</a
+              >
+            </li>
+            <li>
+              <a class="changelog__index-link" href="#v1.0.1" data-testid="changelog-index-1.0.1"
+                >1.0.1</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <section class="changelog__release" data-testid="release-1.0.3" data-version="1.0.3">
+          <h2 class="changelog__version" id="v1.0.3" data-testid="release-version-1.0.3">1.0.3</h2>
+          <p class="changelog__date" data-testid="release-date-1.0.3">
+            Released: <time datetime="2026-11-09">November 9, 2026</time>
+          </p>
+          <ul class="changelog__changes" data-testid="release-changes-1.0.3">
+            <li>
+              In the "Editor Only" and "Preview Only" views, the text now widens to fit the
+              window. The "Side by Side" view is unchanged.
+            </li>
+            <li>
+              Fixed a bug where, with several lines selected, the selection color on some lines
+              did not start at the first character.
+            </li>
+          </ul>
+        </section>
+
+        <section class="changelog__release" data-testid="release-1.0.1" data-version="1.0.1">
+          <h2 class="changelog__version" id="v1.0.1" data-testid="release-version-1.0.1">1.0.1</h2>
+          <p class="changelog__date" data-testid="release-date-1.0.1">
+            Released: <time datetime="2026-11-02">November 2, 2026</time>
+          </p>
+          <ul class="changelog__changes" data-testid="release-changes-1.0.1">
+            <li>Released on Microsoft Store as the first version.</li>
+          </ul>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer" data-testid="site-footer">
+      <div class="site-footer__inner">
+        <a class="brand brand--footer" href="index.html">
+          <svg class="brand__mark" viewBox="107 47 810 930" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient
+                id="brand-ink-footer"
+                gradientUnits="userSpaceOnUse"
+                cx="422"
+                cy="526"
+                r="468"
+              >
+                <stop offset="0" class="brand__stop-ink-soft" />
+                <stop offset="0.6" class="brand__stop-ink" />
+              </radialGradient>
+            </defs>
+            <path
+              class="brand__rim"
+              d="M 512.0 76.9 L 766.6 331.4 A 360 360 0 1 1 257.4 331.4 Z"
+              fill="url(#brand-ink-footer)"
+              stroke-width="60"
+              stroke-linejoin="round"
+            />
+            <ellipse
+              class="brand__light"
+              cx="362"
+              cy="556"
+              rx="48"
+              ry="104"
+              transform="rotate(-28 362 556)"
+              opacity="0.9"
+            />
+          </svg>
+          <span class="brand__name">Sumi Notes</span>
+        </a>
+        <ul class="site-footer__links">
+          <li>
+            <a class="site-footer__link" href="privacy.html" data-testid="footer-privacy"
+              >Privacy Policy</a
+            >
+          </li>
+          <li>
+            <a class="site-footer__link" href="changelog.html" data-testid="footer-changelog"
+              >Version History</a
+            >
+          </li>
+          <li>
+            Contact (English or Japanese):
+            <a
+              class="site-footer__link"
+              href="mailto:sumi.notes.support@gmail.com"
+              data-testid="footer-contact"
+              >sumi.notes.support@gmail.com</a
+            >
+          </li>
+        </ul>
+        <p class="site-footer__copyright" data-testid="footer-copyright">© 2026 Sumi Notes</p>
+      </div>
+    </footer>
+  </body>
+</html>

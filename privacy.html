@@ -13,10 +13,14 @@
       name="description"
       content="Windows のノートアプリ「Sumi Notes」のプライバシーポリシーです。"
     />
+    <link rel="alternate" hreflang="ja" href="privacy.html" />
+    <link rel="alternate" hreflang="en" href="en/privacy.html" />
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/tokens.css" />
     <link rel="stylesheet" href="css/site.css" />
+    <!-- defer にしない: 表示の前に <html> に .nav-ready を付けるため（ヘッダーのメニュー） -->
+    <script src="js/nav.js"></script>
   </head>
   <body>
     <header class="site-header" data-testid="site-header">
@@ -54,16 +58,37 @@
           </svg>
           <span class="brand__name">Sumi Notes</span>
         </a>
-        <nav class="site-nav" aria-label="サイトの案内">
-          <ul class="site-nav__list">
+        <nav class="site-nav" aria-label="サイトの案内" data-site-nav data-testid="site-nav">
+          <button
+            class="site-nav__toggle"
+            type="button"
+            aria-label="メニュー"
+            aria-expanded="false"
+            aria-controls="site-nav-list"
+            data-nav-toggle
+            data-testid="nav-toggle"
+          >
+            <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+            <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+            <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+          </button>
+          <ul class="site-nav__list" id="site-nav-list" data-testid="nav-list">
             <li>
               <a class="site-nav__link" href="index.html#features" data-testid="nav-features"
-                >特徴</a
+                >機能</a
               >
+            </li>
+            <li>
+              <a class="site-nav__link" href="index.html#faq" data-testid="nav-faq">よくある質問</a>
             </li>
             <li>
               <a class="site-nav__link" href="index.html#download" data-testid="nav-download"
                 >入手の方法</a
+              >
+            </li>
+            <li>
+              <a class="site-nav__link" href="changelog.html" data-testid="nav-changelog"
+                >更新履歴</a
               >
             </li>
             <li>
@@ -75,12 +100,15 @@
                 >プライバシーポリシー</a
               >
             </li>
-            <li>
-              <a class="site-nav__link" href="changelog.html" data-testid="nav-changelog"
-                >更新履歴</a
-              >
-            </li>
           </ul>
+          <a
+            class="site-nav__lang"
+            href="en/privacy.html"
+            hreflang="en"
+            lang="en"
+            data-testid="lang-switch"
+            >English</a
+          >
         </nav>
       </div>
     </header>

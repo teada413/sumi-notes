@@ -5,6 +5,7 @@ Windows のノートアプリ「Sumi Notes」の公式サイトです。
 - サイト: https://teada413.github.io/sumi-notes/
 - プライバシーポリシー: https://teada413.github.io/sumi-notes/privacy.html
 - 更新履歴: https://teada413.github.io/sumi-notes/changelog.html
+- English: https://teada413.github.io/sumi-notes/en/ （Privacy Policy: https://teada413.github.io/sumi-notes/en/privacy.html 、Version History: https://teada413.github.io/sumi-notes/en/changelog.html ）
 - お問い合わせ: sumi.notes.support@gmail.com
 
 このリポジトリには、公式サイトのファイル（HTML・CSS・JavaScript・画像・フォント）だけが入っています。アプリのソースコードは入っていません。
